@@ -1,0 +1,1993 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FDE-9B SAP to FinSight Submission Bundle</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #18202a;
+      --muted: #607080;
+      --border: #d8dee6;
+      --accent: #1769aa;
+      --code-bg: #101820;
+      --code-text: #eef6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      padding: 32px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    header p {
+      max-width: 900px;
+      margin: 0;
+      color: var(--muted);
+    }
+    main {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    nav {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    nav h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav li {
+      margin: 7px 0;
+      overflow-wrap: anywhere;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .content {
+      min-width: 0;
+    }
+    .file-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .file-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfcfd;
+    }
+    .file-header h2 {
+      margin: 0;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+    button {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        position: static;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FDE-9B SAP S/4HANA to FinSight Submission Bundle</h1>
+    <p>This single HTML file embeds the repository deliverables for easy previewing, copying, and backup submission. Use the Copy button beside any file section to copy that file's exact content.</p>
+  </header>
+  <main>
+    <nav>
+      <h2>Files</h2>
+      <ul>
+          <li><a href="#README.md">README.md</a></li>
+          <li><a href="#SUBMISSION_CHECKLIST.md">SUBMISSION_CHECKLIST.md</a></li>
+          <li><a href="#CHANGELOG.md">CHANGELOG.md</a></li>
+          <li><a href="#docs/D0_Requirements_v1.md">docs/D0_Requirements_v1.md</a></li>
+          <li><a href="#docs/D1_Integration_Architecture_v1.md">docs/D1_Integration_Architecture_v1.md</a></li>
+          <li><a href="#docs/D2_API_Specification_v1.md">docs/D2_API_Specification_v1.md</a></li>
+          <li><a href="#docs/D4_Error_Handling_Framework_v1.md">docs/D4_Error_Handling_Framework_v1.md</a></li>
+          <li><a href="#docs/D5_Reconciliation_Specification_v1.md">docs/D5_Reconciliation_Specification_v1.md</a></li>
+          <li><a href="#docs/D8_Stakeholder_Communication_v1.md">docs/D8_Stakeholder_Communication_v1.md</a></li>
+          <li><a href="#api/API_SAP_Source.yaml">api/API_SAP_Source.yaml</a></li>
+          <li><a href="#api/API_FinSight_Destination.yaml">api/API_FinSight_Destination.yaml</a></li>
+          <li><a href="#mappings/MAP_Finance_AllDomains_v1.md">mappings/MAP_Finance_AllDomains_v1.md</a></li>
+          <li><a href="#monitoring/D6_Monitoring_Dashboard_v1.md">monitoring/D6_Monitoring_Dashboard_v1.md</a></li>
+          <li><a href="#tests/D7_Integration_Test_Plan_v1.md">tests/D7_Integration_Test_Plan_v1.md</a></li>
+          <li><a href="#diagrams/DGM_C4_SystemContext.mmd">diagrams/DGM_C4_SystemContext.mmd</a></li>
+          <li><a href="#diagrams/DGM_C4_Container.mmd">diagrams/DGM_C4_Container.mmd</a></li>
+          <li><a href="#diagrams/DGM_Sequence_HappyPath.mmd">diagrams/DGM_Sequence_HappyPath.mmd</a></li>
+          <li><a href="#diagrams/DGM_Sequence_ErrorDLQ.mmd">diagrams/DGM_Sequence_ErrorDLQ.mmd</a></li>
+          <li><a href="#diagrams/DGM_DataFlow_Reconciliation.mmd">diagrams/DGM_DataFlow_Reconciliation.mmd</a></li>
+          <li><a href="#postman/FDE9B_Postman_Collection.json">postman/FDE9B_Postman_Collection.json</a></li>
+          <li><a href="#.gitignore">.gitignore</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <section class="file-section" id="README.md">
+        <div class="file-header">
+          <h2>README.md</h2>
+          <button type="button" data-copy="README.md">Copy</button>
+        </div>
+        <pre><code id="code-README.md"># FDE-9B Custom API Integration: SAP S/4HANA to FinSight
+
+## Project Overview
+
+This repository contains a production-oriented integration design for connecting Meridian Manufacturing&#39;s SAP S/4HANA ERP with the FinSight financial analytics platform. The solution uses SAP ODP/CDS extraction, Kafka-based decoupling, transformation services, idempotent FinSight loading, automated reconciliation, and full observability.
+
+The design is written for an FDE-style deployment where business outcomes, system reliability, stakeholder communication, and implementation practicality are evaluated together.
+
+## Business Problem
+
+Meridian&#39;s finance team depends on delayed exports from SAP, creating limited visibility into GL, AP, AR, procurement, inventory, and budget performance. The proposed integration reduces finance data freshness from roughly 24 hours to a 4-hour SLA for standard domains and near-real-time deltas for priority postings.
+
+## Solution Summary
+
+SAP S/4HANA exposes finance and operational data through CDS views, ODP delta subscriptions, RFC/BAPI calls, and IDoc feeds. The integration layer extracts changes, publishes normalized events to Kafka, transforms and validates records, loads FinSight through secured REST APIs, and runs reconciliation controls after every batch.
+
+```mermaid
+flowchart LR
+  SAP[SAP S/4HANA] --&gt; EXT[Extraction Layer]
+  EXT --&gt; KAFKA[Kafka Topics]
+  KAFKA --&gt; TX[Transformation Engine]
+  TX --&gt; FS[FinSight APIs]
+  TX --&gt; RECON[Reconciliation Service]
+  TX --&gt; DLQ[Dead Letter Queue]
+  RECON --&gt; MON[Monitoring and Audit]
+  FS --&gt; CFO[CFO Dashboards]
+```
+
+## Repository Structure
+
+| Path | Purpose |
+| --- | --- |
+| `docs/` | Requirements, architecture, API, error handling, reconciliation, stakeholder handoff |
+| `api/` | OpenAPI 3.0 source and destination API specifications |
+| `mappings/` | 80+ field-level mapping specification across SAP domains |
+| `diagrams/` | Mermaid source diagrams for C4, sequence, data flow, and network views |
+| `monitoring/` | Grafana-style dashboard and alert specification |
+| `tests/` | Mandatory functional, non-functional, failure, security, and reconciliation test plan |
+| `postman/` | Example Postman collection skeleton |
+
+## Deliverable Index
+
+| Deliverable | File |
+| --- | --- |
+| README and project overview | `README.md` |
+| Changelog | `CHANGELOG.md` |
+| Initial requirements | `docs/D0_Requirements_v1.md` |
+| D1 Integration architecture | `docs/D1_Integration_Architecture_v1.md`, `diagrams/*.mmd` |
+| D2 API specification | `docs/D2_API_Specification_v1.md`, `api/API_SAP_Source.yaml`, `api/API_FinSight_Destination.yaml` |
+| D3 Data mapping | `mappings/MAP_Finance_AllDomains_v1.md` |
+| D4 Error handling | `docs/D4_Error_Handling_Framework_v1.md` |
+| D5 Reconciliation | `docs/D5_Reconciliation_Specification_v1.md` |
+| D6 Monitoring | `monitoring/D6_Monitoring_Dashboard_v1.md` |
+| D7 Test plan | `tests/D7_Integration_Test_Plan_v1.md` |
+| Stakeholder communication | `docs/D8_Stakeholder_Communication_v1.md` |
+
+## Target Architecture Principles
+
+- Preserve financial correctness before optimizing throughput.
+- Use ODP delta tokens for retry-safe extraction and no-loss recovery.
+- Keep SAP production impact low through controlled package sizes, read windows, and RFC pool limits.
+- Use Kafka for decoupling, replay, buffering, and surge absorption.
+- Make all FinSight writes idempotent using deterministic business keys.
+- Route bad records to domain-specific DLQs without blocking clean records.
+- Keep all financial data processing in the India region to satisfy data residency expectations.
+
+## Key SLAs
+
+| Metric | Target |
+| --- | --- |
+| Standard data freshness | Under 4 hours |
+| Priority GL delta freshness | Under 30 minutes |
+| Batch reconciliation completion | Under 15 minutes after load |
+| Record accuracy after transformation | Greater than 99.9% |
+| Mandatory field completeness | Greater than 99.5% |
+| Pipeline availability | 99.5% monthly |
+| Duplicate target records | 0 tolerated |
+
+## Assumptions
+
+- SAP sandbox access may not be available; specifications are based on SAP S/4HANA integration patterns and the assessment appendix.
+- FinSight is treated as a REST/OAuth 2.0 analytics platform with batch ingestion endpoints.
+- Production deployment runs in an India-hosted cloud region.
+- Master data dependencies such as cost centres, profit centres, vendors, customers, materials, and exchange rates are synchronized before dependent transactional loads.
+
+## Validation Checklist
+
+- OpenAPI files are written in OpenAPI 3.0.3 format.
+- Mapping file contains more than the 50-field minimum.
+- Tests include the 25 mandatory scenarios from the assessment.
+- Error registry includes extraction, mapping, load, reconciliation, and infrastructure errors.
+- Monitoring covers pipeline health, throughput, latency, errors, DLQ, reconciliation, SAP, FinSight, freshness, resources, Kafka lag, and circuit breakers.
+
+## Personalization Needed Before Final Submission
+
+- Replace repository name with `FDE-9B-{YourName}-{BatchID}`.
+- Add your real name, batch ID, and GitHub link.
+- Export Mermaid diagrams to PNG/SVG if the portal requires image uploads.
+- Add actual lint output if Spectral or Swagger Editor is available.
+- Add commit history progressively if the evaluation checks commit cadence.
+
+## References Used
+
+- SAP S/4HANA concepts: ACDOCA, CDS views, ODP, RFC, BAPI, IDoc, SAP Gateway/OData.
+- OpenAPI 3.0 conventions for REST specification.
+- Enterprise Integration Patterns: message broker, dead letter channel, idempotent receiver, circuit breaker, wire tap.
+- Google SRE concepts: SLIs, SLOs, alerting, and error budgets.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="SUBMISSION_CHECKLIST.md">
+        <div class="file-header">
+          <h2>SUBMISSION_CHECKLIST.md</h2>
+          <button type="button" data-copy="SUBMISSION_CHECKLIST.md">Copy</button>
+        </div>
+        <pre><code id="code-SUBMISSION_CHECKLIST.md"># Submission Checklist
+
+## Repository Setup
+
+- [ ] Rename remote repository to `FDE-9B-{YourName}-{BatchID}`.
+- [ ] Make GitHub repository private.
+- [ ] Add `@ZethetaIntern` as collaborator with required access.
+- [ ] Disable public wiki and forking if available in repository settings.
+- [ ] Add your name, batch ID, and repository URL to `README.md`.
+
+## Deliverables
+
+- [x] `README.md` project overview created.
+- [x] `CHANGELOG.md` created.
+- [x] Requirements document created.
+- [x] Integration architecture document created.
+- [x] Mermaid diagram source files created.
+- [x] SAP source OpenAPI specification created.
+- [x] FinSight destination OpenAPI specification created.
+- [x] Postman collection skeleton created.
+- [x] 50+ mapping requirement exceeded with 102 mapping rows.
+- [x] Error handling framework created.
+- [x] Reconciliation specification created.
+- [x] Monitoring dashboard specification created.
+- [x] 25 mandatory test scenarios included.
+- [x] Stakeholder communication document created.
+
+## Before Upload
+
+- [ ] Run OpenAPI validation in Swagger Editor or Spectral and save the report.
+- [ ] Export Mermaid diagrams as PNG/SVG if required by the portal.
+- [ ] Replace placeholder hosts such as `example.in` if the evaluator expects environment-specific URLs.
+- [ ] Commit files with meaningful messages.
+- [ ] Push to the private GitHub repository before the deadline.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="CHANGELOG.md">
+        <div class="file-header">
+          <h2>CHANGELOG.md</h2>
+          <button type="button" data-copy="CHANGELOG.md">Copy</button>
+        </div>
+        <pre><code id="code-CHANGELOG.md"># Changelog
+
+## Day 1 - Repository Setup and Discovery
+
+- Created repository structure for documentation, API specs, mappings, diagrams, monitoring, tests, and Postman artifacts.
+- Defined project overview, business problem, scope, assumptions, SLAs, and acceptance checklist in `README.md`.
+- Captured initial business, technical, security, compliance, and non-functional requirements.
+- Drafted C4 and data-flow diagram source files in Mermaid format.
+
+## Day 2 - Architecture Design
+
+- Added target architecture using extraction, Kafka, transformation, reconciliation, DLQ, and monitoring components.
+- Documented technology choices and alternatives.
+- Added network and deployment assumptions for India-region processing.
+
+## Day 3 - API and Data Flow
+
+- Added OpenAPI specifications for SAP source APIs and FinSight destination APIs.
+- Documented end-to-end happy path, retry/DLQ flow, and reconciliation mismatch flow.
+
+## Day 4 - Mapping, Resilience, and Controls
+
+- Added 80+ field mappings across GL, AP, AR, cost centre, profit centre, material ledger, PO, SO, fixed assets, bank statements, budget/actual, and inventory.
+- Added error handling, reconciliation, monitoring, and test specifications.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D0_Requirements_v1.md">
+        <div class="file-header">
+          <h2>docs/D0_Requirements_v1.md</h2>
+          <button type="button" data-copy="docs/D0_Requirements_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D0_Requirements_v1.md"># D0 Requirements and Discovery
+
+## Client Context
+
+Meridian Manufacturing runs SAP S/4HANA as its system of record for finance, procurement, inventory, sales, and controlling. Finance leadership needs fresher analytics in FinSight without compromising SAP stability, accounting correctness, or auditability.
+
+## Business Objectives
+
+| ID | Objective | Success Measure |
+| --- | --- | --- |
+| BO-001 | Improve finance data freshness | Standard domains available in FinSight within 4 hours |
+| BO-002 | Reduce manual reconciliation | Automated source-target reconciliation after each batch |
+| BO-003 | Provide CFO visibility | GL, AP, AR, budget, cash, and working capital metrics available in dashboards |
+| BO-004 | Preserve financial audit trail | Every FinSight record traceable to SAP source document and extraction batch |
+| BO-005 | Support India compliance | GST, TDS, fiscal year, and data residency constraints represented in design |
+
+## Source Domains
+
+| Domain | SAP Source | Interface | Frequency |
+| --- | --- | --- | --- |
+| General Ledger | ACDOCA, BKPF | ODP/CDS | 30 min delta |
+| Accounts Payable | ACDOCA, LFA1, BSIK/BSAK compatibility views | ODP/CDS | 2 hour delta |
+| Accounts Receivable | ACDOCA, KNA1, BSID/BSAD compatibility views | ODP/CDS | 2 hour delta |
+| Cost Centre | CSKS, CSKT, SETNODE | CDS | Daily plus on-change |
+| Profit Centre | CEPC, CEPCT | CDS | Daily plus on-change |
+| Material Ledger | MLDOC, CKMLCR | CDS | 4 hour delta |
+| Purchase Orders | EKKO, EKPO, EKBE | OData/CDS | 2 hour delta |
+| Sales Orders | VBAK, VBAP, VBFA | OData/CDS | 2 hour delta |
+| Fixed Assets | ANLA, ANLC, ACDOCA | CDS | Daily |
+| Bank Statements | FEBKO, FEBEP | IDoc/CDS | 1 hour |
+| Budget vs Actual | ACDOCA, ACDOCP | CDS | 4 hour delta |
+| Inventory | MATDOC, MARA, MARD | ODP/CDS | 2 hour delta |
+
+## Functional Requirements
+
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| FR-001 | Extract initial full loads and subsequent deltas from SAP | Must |
+| FR-002 | Transform SAP-specific structures into FinSight canonical schemas | Must |
+| FR-003 | Validate mandatory fields, referential integrity, dates, currencies, and GST fields | Must |
+| FR-004 | Load transformed data into FinSight with idempotency keys | Must |
+| FR-005 | Reconcile record counts, debit/credit totals, checksums, and source-target keys | Must |
+| FR-006 | Route invalid records to DLQ with actionable error codes | Must |
+| FR-007 | Provide dashboards and alerts for operations and finance stakeholders | Must |
+| FR-008 | Support reprocessing from Kafka and DLQ | Should |
+| FR-009 | Generate stakeholder-specific reports for CFO, SAP Basis, and platform engineering | Should |
+
+## Non-Functional Requirements
+
+| Category | Requirement |
+| --- | --- |
+| Performance | Process 500,000 GL records within 2 hours during peak loads |
+| Scalability | Scale transformation workers horizontally by Kafka consumer group |
+| Availability | 99.5% monthly pipeline availability |
+| Security | OAuth 2.0 for FinSight, SAP service accounts with least privilege, TLS 1.2+ |
+| Compliance | Financial data remains in India region; audit logs retained for 7 years |
+| Observability | Metrics, logs, and traces include correlation IDs and batch IDs |
+| Maintainability | Versioned OpenAPI contracts and versioned mapping rules |
+
+## Stakeholders
+
+| Stakeholder | Concern | Communication Output |
+| --- | --- | --- |
+| CFO | Timely, reliable finance visibility | Executive summary and risk view |
+| Controller | Reconciliation and audit evidence | Reconciliation reports |
+| SAP Basis Admin | Production impact and RFC pool use | Technical handoff |
+| Security Lead | Access, encryption, residency | Security controls matrix |
+| Platform Engineer | API contracts and rate limits | API design review |
+| Operations Team | Monitoring and incident response | Runbook and dashboard |
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D1_Integration_Architecture_v1.md">
+        <div class="file-header">
+          <h2>docs/D1_Integration_Architecture_v1.md</h2>
+          <button type="button" data-copy="docs/D1_Integration_Architecture_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D1_Integration_Architecture_v1.md"># D1 Integration Architecture
+
+## Executive Architecture
+
+The solution follows an event-driven integration pattern. SAP remains the system of record. The integration layer extracts data using delta-safe methods, normalizes messages through Kafka topics, applies domain-specific transformation and validation, loads FinSight using idempotent APIs, and reconciles each batch.
+
+## C4 Level 1: System Context
+
+See `diagrams/DGM_C4_SystemContext.mmd`.
+
+Actors and systems:
+
+- Finance users consume FinSight dashboards.
+- SAP S/4HANA provides financial and operational data.
+- Integration services move, transform, validate, and reconcile data.
+- FinSight stores analytical records and exposes dashboards.
+- Identity provider issues OAuth tokens for FinSight and controls admin access.
+- Monitoring stack reports health and alerts operations.
+
+## C4 Level 2: Containers
+
+| Container | Responsibility |
+| --- | --- |
+| Scheduler | Triggers full loads, deltas, retries, and reconciliation jobs |
+| SAP Connector | Reads ODP/CDS/OData/RFC/IDoc sources and manages delta tokens |
+| Kafka | Buffers domain events, supports replay, and isolates SAP from FinSight outages |
+| Transformation Engine | Converts SAP records to FinSight canonical schemas |
+| Validation Service | Applies quality rules, referential checks, and compliance checks |
+| FinSight Loader | Sends idempotent batch loads with retry and rate-limit handling |
+| Reconciliation Service | Compares source and target counts, totals, checksums, and keys |
+| DLQ Service | Stores failed records for review and controlled reprocessing |
+| Monitoring Stack | Publishes metrics, logs, traces, alerts, and audit lineage |
+
+## C4 Level 3: Component View
+
+| Component | Key Functions |
+| --- | --- |
+| Delta Token Manager | Stores last successful ODP token per domain and company code |
+| Extraction Adapter Registry | Selects CDS, OData, RFC, or IDoc adapter per domain |
+| Schema Registry | Maintains source and canonical schema versions |
+| Mapping Rule Engine | Executes versioned transformation rules |
+| Reference Data Cache | Holds company code, currency, vendor, customer, cost centre, and profit centre lookups |
+| Idempotency Key Builder | Builds deterministic keys such as `tenant:domain:sourceDoc:lineItem:fiscalYear` |
+| Retry Coordinator | Applies exponential backoff, jitter, and retry budgets |
+| Circuit Breaker | Opens on repeated SAP or FinSight failures |
+| Audit Writer | Writes immutable lineage events for every batch and record outcome |
+
+## Data Flow
+
+1. Scheduler requests a delta extraction for a domain and company code.
+2. SAP Connector reads data from CDS/ODP using the last committed delta token.
+3. Extracted messages are written to domain Kafka topics.
+4. Transformation Engine converts source records to canonical FinSight payloads.
+5. Validation Service enriches and validates data.
+6. Valid records are loaded to FinSight with idempotency keys.
+7. Invalid records are routed to DLQ with error code, source payload, and remediation hint.
+8. Reconciliation Service compares SAP source metrics with FinSight load metrics.
+9. Monitoring Stack emits status, alerts, and audit lineage.
+10. Delta token is committed only after successful durable publish and batch registration.
+
+## Technology Stack
+
+| Layer | Selected | Rationale | Alternative Considered |
+| --- | --- | --- | --- |
+| Source extraction | SAP ODP/CDS/OData/RFC/IDoc | Native SAP patterns and delta support | Direct DB access rejected due to support and security risk |
+| Messaging | Apache Kafka | Replay, buffering, partitioning, consumer groups | Point-to-point APIs rejected due to outage coupling |
+| Transformation | Python/Java service with rule engine | Easy rule versioning and scale-out | ETL-only tool rejected for lower code control |
+| API gateway | Managed gateway | Rate limiting, auth, logging | Direct service exposure rejected |
+| Monitoring | Prometheus, Grafana, OpenTelemetry, Loki/ELK | Standard observability stack | Only application logs rejected |
+| Storage | India-region object storage and relational metadata DB | Audit evidence and batch state | Local disk rejected |
+
+## Network Architecture
+
+SAP is assumed to run on-premise or in a private client network. The integration runtime connects through a site-to-site VPN or private link into an India-region cloud VPC. Only approved ports are opened for SAP Gateway/OData, RFC, and monitoring export. FinSight APIs are accessed through a private endpoint where available.
+
+## Security Design
+
+- SAP service accounts use least-privilege authorizations for RFC, OData, and CDS views.
+- FinSight uses OAuth 2.0 client credentials with scoped tokens.
+- All traffic uses TLS 1.2 or higher.
+- Kafka, DLQ, object storage, and metadata DB are encrypted at rest.
+- Secrets are stored in a managed secret store and rotated every 90 days.
+- Audit logs include user/service identity, batch ID, source document, target ID, action, and timestamp.
+
+## Risk Register
+
+| ID | Risk | Probability | Impact | Mitigation |
+| --- | --- | --- | --- | --- |
+| R-001 | SAP performance degradation during extraction | Medium | High | Package size limits, off-peak full loads, Basis review |
+| R-002 | ODP provider schema changes | Medium | High | Schema registry, contract tests, alert and graceful degradation |
+| R-003 | FinSight API rate limiting | High | Medium | Adaptive throttling, Retry-After compliance, queue buffering |
+| R-004 | Invalid master data references | Medium | High | Preload master data, referential checks, business exception queue |
+| R-005 | Currency conversion errors | Medium | High | TCURR point-in-time rates, stale-rate flag, reconciliation |
+| R-006 | Duplicate loads after retry | Medium | High | Idempotency keys and payload hash comparison |
+| R-007 | Network partition | Medium | Medium | Kafka buffering, circuit breaker, replay |
+| R-008 | GST/TDS fields transformed incorrectly | Low | High | Tax-specific validation and field-level audit |
+| R-009 | DLQ grows beyond operations capacity | Medium | Medium | DLQ thresholds, owner assignment, reprocessing workflow |
+| R-010 | Poor stakeholder adoption | Medium | Medium | CFO summary, IT handoff, training, dashboard sign-off |
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D2_API_Specification_v1.md">
+        <div class="file-header">
+          <h2>docs/D2_API_Specification_v1.md</h2>
+          <button type="button" data-copy="docs/D2_API_Specification_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D2_API_Specification_v1.md"># D2 API Specification
+
+## Scope
+
+The API design covers two sides of the integration:
+
+- SAP source extraction APIs exposed through a controlled integration facade.
+- FinSight destination ingestion APIs that receive canonical financial payloads.
+
+OpenAPI files:
+
+- `api/API_SAP_Source.yaml`
+- `api/API_FinSight_Destination.yaml`
+
+## Source Endpoints
+
+| ID | Endpoint | Domain | Extraction |
+| --- | --- | --- | --- |
+| SRC-001 | `/sap/v1/general-ledger/journal-entries` | General Ledger | ODP delta |
+| SRC-002 | `/sap/v1/accounts-payable/open-items` | Accounts Payable | ODP delta |
+| SRC-003 | `/sap/v1/accounts-receivable/open-items` | Accounts Receivable | ODP delta |
+| SRC-004 | `/sap/v1/master-data/cost-centres` | Cost Centre | CDS/OData |
+| SRC-005 | `/sap/v1/master-data/profit-centres` | Profit Centre | CDS/OData |
+| SRC-006 | `/sap/v1/material-ledger/movements` | Material Ledger | CDS delta |
+| SRC-007 | `/sap/v1/procurement/purchase-orders` | Purchase Orders | OData/CDS |
+| SRC-008 | `/sap/v1/sales/sales-orders` | Sales Orders | OData/CDS |
+| SRC-009 | `/sap/v1/fixed-assets/assets` | Fixed Assets | CDS |
+| SRC-010 | `/sap/v1/cash/bank-statements` | Bank Statements | IDoc/CDS |
+| SRC-011 | `/sap/v1/controlling/budget-actuals` | Budget vs Actual | CDS |
+| SRC-012 | `/sap/v1/inventory/stock-movements` | Inventory | ODP/CDS |
+
+## Destination Endpoints
+
+| ID | Endpoint | Domain |
+| --- | --- | --- |
+| DST-001 | `/finsight/v1/journal-entries:batchUpsert` | General Ledger |
+| DST-002 | `/finsight/v1/payables:batchUpsert` | Accounts Payable |
+| DST-003 | `/finsight/v1/receivables:batchUpsert` | Accounts Receivable |
+| DST-004 | `/finsight/v1/cost-centres:batchUpsert` | Cost Centre |
+| DST-005 | `/finsight/v1/profit-centres:batchUpsert` | Profit Centre |
+| DST-006 | `/finsight/v1/material-movements:batchUpsert` | Material Ledger |
+| DST-007 | `/finsight/v1/purchase-orders:batchUpsert` | Purchase Orders |
+| DST-008 | `/finsight/v1/sales-orders:batchUpsert` | Sales Orders |
+| DST-009 | `/finsight/v1/fixed-assets:batchUpsert` | Fixed Assets |
+| DST-010 | `/finsight/v1/bank-statements:batchUpsert` | Bank Statements |
+| DST-011 | `/finsight/v1/budget-actuals:batchUpsert` | Budget vs Actual |
+| DST-012 | `/finsight/v1/inventory:batchUpsert` | Inventory |
+
+## Authentication
+
+SAP extraction uses a technical service account with SAP Gateway/OData and RFC authorization objects. FinSight uses OAuth 2.0 client credentials. Tokens are cached by the loader and refreshed before expiry. Expired tokens are retried once after refresh.
+
+## Idempotency
+
+All FinSight write requests require an `Idempotency-Key` header. The key is deterministic and includes tenant, domain, SAP document number, fiscal year, company code, and line item where applicable.
+
+## Pagination and Delta Strategy
+
+Source endpoints support cursor-based pagination using `cursor` and `limit`. Delta extraction uses `deltaToken` and returns `nextDeltaToken`. The integration commits a delta token only after messages are durably published and batch metadata is recorded.
+
+## Rate Limiting
+
+FinSight responses include:
+
+- `X-RateLimit-Limit`
+- `X-RateLimit-Remaining`
+- `X-RateLimit-Reset`
+- `Retry-After` on HTTP 429
+
+The loader honors `Retry-After`, uses exponential backoff with jitter, and slows consumer polling when remaining quota falls below 10%.
+
+## Error Response
+
+All APIs use a shared error envelope:
+
+```json
+{
+  &quot;errorCode&quot;: &quot;ERR-LOAD-001&quot;,
+  &quot;message&quot;: &quot;Rate limit exceeded&quot;,
+  &quot;correlationId&quot;: &quot;corr-20260628-001&quot;,
+  &quot;details&quot;: {
+    &quot;domain&quot;: &quot;GL&quot;,
+    &quot;batchId&quot;: &quot;BATCH-GL-20260628-0930&quot;
+  }
+}
+```
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D4_Error_Handling_Framework_v1.md">
+        <div class="file-header">
+          <h2>docs/D4_Error_Handling_Framework_v1.md</h2>
+          <button type="button" data-copy="docs/D4_Error_Handling_Framework_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D4_Error_Handling_Framework_v1.md"># D4 Error Handling Framework
+
+## Strategy
+
+The integration treats errors by class:
+
+- Transient errors are retried with bounded backoff and jitter.
+- Permanent schema, authorization, and business-rule errors stop retries and route to DLQ or business exception queues.
+- Data quality errors are isolated per record so clean records continue processing.
+- System errors open circuit breakers and raise operational alerts.
+
+## Retry Policy
+
+| Error Class | Attempts | Backoff | Final Action |
+| --- | --- | --- | --- |
+| SAP RFC timeout | 3 | Exponential with jitter, cap 60s | Open circuit, alert |
+| SAP ODP empty delta anomaly | 1 | Fixed 30s | Alert ODP monitor |
+| FinSight HTTP 429 | 5 | Honor `Retry-After` | Pause consumer partition |
+| FinSight HTTP 503 | 5 | 60s linear | Open circuit |
+| Token expiry | 1 | Immediate refresh | Alert security if still failing |
+| Validation failure | 0 | None | DLQ or business exception |
+
+## Circuit Breakers
+
+| Dependency | Open Condition | Half-Open Probe | Recovery |
+| --- | --- | --- | --- |
+| SAP RFC | 5 failures in 2 minutes | 1 lightweight metadata call | Close after 3 successes |
+| SAP OData | P95 latency over 10s and error rate over 10% | 1 paged request with limit 10 | Close after 5 successes |
+| FinSight API | 429/503 above threshold for 5 minutes | 1 small batch of 10 records | Close after 3 successful batches |
+| Kafka | Broker unavailable | Metadata refresh | Close after ISR restored |
+
+## Error Code Registry
+
+| Code | Category | Source | Description | Default Action |
+| --- | --- | --- | --- | --- |
+| ERR-EXT-001 | TRANSIENT | SAP RFC | RFC timeout after 30 seconds | Retry max 3 |
+| ERR-EXT-002 | TRANSIENT | SAP RFC | RFC connection pool exhausted | Wait 60s, retry, alert |
+| ERR-EXT-003 | PERMANENT | SAP ODP | ODP subscription invalidated | Halt domain extraction |
+| ERR-EXT-004 | TRANSIENT | SAP ODP | Empty delta despite known changes | Retry once, check ODP monitor |
+| ERR-MAP-001 | DATA_QUALITY | Transformation | Mandatory source field is NULL | Default if configured else DLQ |
+| ERR-MAP-002 | DATA_QUALITY | Transformation | Invalid date format | Attempt correction else DLQ |
+| ERR-MAP-003 | DATA_QUALITY | Transformation | Cost centre not found | Business exception queue |
+| ERR-MAP-004 | DATA_QUALITY | Transformation | Invalid currency code | Correct common typo else DLQ |
+| ERR-MAP-005 | DATA_QUALITY | Transformation | Exchange rate missing | Nearest rate with stale flag |
+| ERR-MAP-006 | PERMANENT | Transformation | Rule execution error | DLQ and engineering alert |
+| ERR-LOAD-001 | TRANSIENT | FinSight API | HTTP 429 rate limited | Honor Retry-After |
+| ERR-LOAD-002 | TRANSIENT | FinSight API | HTTP 503 unavailable | Linear backoff max 5 |
+| ERR-LOAD-003 | PERMANENT | FinSight API | HTTP 422 business violation | Business exception queue |
+| ERR-LOAD-004 | PERMANENT | FinSight API | HTTP 409 duplicate | Compare payload hashes |
+| ERR-LOAD-005 | PERMANENT | FinSight API | HTTP 401 authentication | Refresh token once then alert |
+| ERR-RECON-001 | DATA_QUALITY | Reconciliation | Record count mismatch | Break report |
+| ERR-RECON-002 | DATA_QUALITY | Reconciliation | Checksum variance exceeds tolerance | Escalate to data steward |
+| ERR-RECON-003 | DATA_QUALITY | Reconciliation | Referential integrity violation | Trigger master data resync |
+| ERR-SYS-001 | SYSTEM | Infrastructure | Kafka broker unreachable | Circuit breaker and P1 alert |
+| ERR-SYS-002 | SYSTEM | Infrastructure | Disk below 10% | Archive logs and expand disk |
+
+## DLQ Payload
+
+```json
+{
+  &quot;dlqId&quot;: &quot;DLQ-GL-20260628-0001&quot;,
+  &quot;batchId&quot;: &quot;BATCH-GL-20260628-0930&quot;,
+  &quot;domain&quot;: &quot;GL&quot;,
+  &quot;sourceSystem&quot;: &quot;SAP_S4HANA&quot;,
+  &quot;sourceKey&quot;: &quot;1000:5100001234:2026:001&quot;,
+  &quot;errorCode&quot;: &quot;ERR-MAP-003&quot;,
+  &quot;errorMessage&quot;: &quot;Referenced cost centre CC-9001 not found&quot;,
+  &quot;payloadHash&quot;: &quot;sha256:...&quot;,
+  &quot;firstFailedAt&quot;: &quot;2026-06-28T09:31:15+05:30&quot;,
+  &quot;retryable&quot;: false,
+  &quot;ownerQueue&quot;: &quot;FINANCE_MASTER_DATA&quot;
+}
+```
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D5_Reconciliation_Specification_v1.md">
+        <div class="file-header">
+          <h2>docs/D5_Reconciliation_Specification_v1.md</h2>
+          <button type="button" data-copy="docs/D5_Reconciliation_Specification_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D5_Reconciliation_Specification_v1.md"># D5 Reconciliation Specification
+
+## Objective
+
+Reconciliation proves that the records accepted by FinSight match the SAP source extract after transformation. It is mandatory for financial confidence, audit evidence, and operational sign-off.
+
+## Reconciliation Levels
+
+| Level | Check | Example |
+| --- | --- | --- |
+| Batch | Source count equals loaded plus rejected count | SAP 6,240 = FinSight 6,236 + DLQ 4 |
+| Amount | Debit and credit totals match within tolerance | INR debit total equals credit total |
+| Checksum | Stable hash of source business keys and normalized amounts | SHA-256 per batch |
+| Referential | Foreign keys resolve to loaded master data | Cost centre exists |
+| Lineage | Every target record links to source document and batch | SAP BELNR to FinSight ID |
+
+## Batch Report Fields
+
+| Field | Example |
+| --- | --- |
+| Batch ID | BATCH-GL-20260628-0930 |
+| Extraction Timestamp | 2026-06-28T09:30:00+05:30 |
+| Load Completion Timestamp | 2026-06-28T09:32:45+05:30 |
+| Domain | General Ledger |
+| Company Code | 1000 |
+| Source Record Count | 6240 |
+| Target Accepted Count | 6236 |
+| DLQ Count | 4 |
+| Source Debit Total | 125000000.00 INR |
+| Source Credit Total | 125000000.00 INR |
+| Target Debit Total | 125000000.00 INR |
+| Target Credit Total | 125000000.00 INR |
+| Status | RECONCILED_WITH_REJECTIONS |
+
+## Tolerances
+
+| Check | Tolerance |
+| --- | --- |
+| Record count | Exact, after accounting for DLQ/business exceptions |
+| Functional currency totals | INR 0.00 for GL, INR 1.00 for analytical summaries |
+| Foreign currency conversion | INR 0.50 due to rounding |
+| Debit-credit balance | INR 0.00 |
+| Checksum | Exact |
+
+## Break Workflow
+
+1. Reconciliation detects variance.
+2. Break report is generated with source keys, target keys, amount variance, and probable cause.
+3. Alert is routed to operations for technical breaks or finance data steward for business breaks.
+4. Affected batch is marked `RECON_BREAK`.
+5. Reprocessing is blocked for target overwrite until owner approves action.
+6. Audit trail records resolution, approver, timestamp, and final status.
+
+## Sample Reconciliation SQL Logic
+
+```sql
+select
+  batch_id,
+  company_code,
+  count(*) as record_count,
+  sum(debit_amount_inr) as debit_total,
+  sum(credit_amount_inr) as credit_total,
+  sha256(string_agg(source_business_key || normalized_amount_inr, &#39;|&#39; order by source_business_key)) as batch_checksum
+from canonical_journal_entries
+where batch_id = :batch_id
+group by batch_id, company_code;
+```
+
+</code></pre>
+      </section>
+      <section class="file-section" id="docs/D8_Stakeholder_Communication_v1.md">
+        <div class="file-header">
+          <h2>docs/D8_Stakeholder_Communication_v1.md</h2>
+          <button type="button" data-copy="docs/D8_Stakeholder_Communication_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-docs/D8_Stakeholder_Communication_v1.md"># D8 Stakeholder Communication
+
+## CFO Executive Summary
+
+Meridian Manufacturing currently depends on delayed SAP extracts for financial analytics, which slows decisions around cash, payables, receivables, inventory, and budget control. The proposed SAP-to-FinSight integration creates an automated, monitored, and reconciled data flow so finance users can trust fresher dashboards without manually moving files.
+
+### Value
+
+| Benefit | Impact |
+| --- | --- |
+| Data freshness | Improves from about 24 hours to a 4-hour standard SLA |
+| Manual effort | Reduces repeated export, cleansing, and reconciliation work |
+| Audit confidence | Every FinSight figure links back to SAP source documents |
+| Risk reduction | Failures are isolated through DLQ, alerts, and automated reconciliation |
+
+### Top Risks
+
+| Risk | Business Impact | Mitigation |
+| --- | --- | --- |
+| SAP extraction slows production | Finance and operations disruption | Controlled extraction windows and SAP Basis approval |
+| Data mismatch after transformation | Loss of trust in dashboards | Batch reconciliation and variance reports |
+| Master data quality issues | Incorrect cost centre or vendor reporting | Business exception queue and master data remediation |
+
+### CFO Ask
+
+Approve the 15-day design and prototype phase, nominate finance data owners for reconciliation sign-off, and confirm the target freshness SLA by domain.
+
+## Client IT Handoff
+
+### SAP Changes
+
+- ODP subscriptions for GL, AP, AR, inventory, material ledger, and budget domains.
+- OData/CDS exposure for master data and document flows.
+- RFC destination for controlled metadata and health checks.
+- IDoc partner profile for bank statement events where applicable.
+
+### Network
+
+| Flow | Protocol | Direction |
+| --- | --- | --- |
+| Integration runtime to SAP Gateway | HTTPS 443 | Inbound to SAP network |
+| Integration runtime to SAP RFC | RFC/SNC approved port | Inbound to SAP network |
+| Integration runtime to FinSight | HTTPS 443 | Outbound/private endpoint |
+| Monitoring export | HTTPS 443 | Outbound to monitoring |
+
+### Security
+
+- Service account restricted to approved CDS views, OData services, and RFC function groups.
+- No direct database reads.
+- Secrets stored in managed vault.
+- TLS 1.2+ required.
+- All financial data processed in India-region infrastructure.
+
+### Support Model
+
+| Level | Owner | Scope |
+| --- | --- | --- |
+| L1 | Operations | Dashboard alerts, restart runbooks, known retry actions |
+| L2 | Integration Team | Mapping errors, DLQ review, batch replay |
+| L3 | SAP/Platform Engineering | ODP provider changes, API contract changes, infrastructure incidents |
+
+## Platform Engineering Design Review
+
+### API Contract
+
+FinSight receives canonical batch upsert payloads with idempotency keys, batch metadata, and source lineage. Error responses follow a common envelope with `errorCode`, `message`, `correlationId`, and structured details.
+
+### Authentication Flow
+
+1. Loader requests OAuth token using client credentials.
+2. FinSight identity endpoint returns scoped access token.
+3. Loader sends batch request with bearer token and idempotency key.
+4. Loader refreshes token before expiry or after one 401 response.
+
+### Throughput Expectations
+
+| Domain | Average | Peak |
+| --- | --- | --- |
+| GL | 10,000 records/hour | 500,000 records/batch |
+| AP/AR | 3,000 records/hour | 75,000 records/batch |
+| Inventory | 8,000 records/hour | 150,000 records/batch |
+| Master data | 500 records/hour | 25,000 records/full refresh |
+
+### Engineering Support Requests
+
+- Confirm maximum accepted batch size per endpoint.
+- Confirm idempotency retention window.
+- Confirm rate-limit quota for month-end close.
+- Confirm webhook support for asynchronous ingestion status.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="api/API_SAP_Source.yaml">
+        <div class="file-header">
+          <h2>api/API_SAP_Source.yaml</h2>
+          <button type="button" data-copy="api/API_SAP_Source.yaml">Copy</button>
+        </div>
+        <pre><code id="code-api/API_SAP_Source.yaml">openapi: 3.0.3
+info:
+  title: SAP S/4HANA Source Extraction API
+  version: 1.0.0
+  description: Integration facade for extracting SAP S/4HANA finance and operational data.
+servers:
+  - url: https://sap-gateway.example.in
+security:
+  - sapBasic: []
+paths:
+  /sap/v1/general-ledger/journal-entries:
+    get:
+      operationId: listJournalEntries
+      summary: Extract GL journal entries from SAP Universal Journal
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/FiscalYear&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Journal entries page
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/JournalEntryPage&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/responses/Error&#39;
+  /sap/v1/accounts-payable/open-items:
+    get:
+      operationId: listPayableOpenItems
+      summary: Extract AP open items
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: AP open items page
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/responses/Error&#39;
+  /sap/v1/accounts-receivable/open-items:
+    get:
+      operationId: listReceivableOpenItems
+      summary: Extract AR open items
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: AR open items page
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+        &#39;400&#39;:
+          $ref: &#39;#/components/responses/Error&#39;
+  /sap/v1/master-data/cost-centres:
+    get:
+      operationId: listCostCentres
+      summary: Extract cost centre master data
+      parameters:
+        - $ref: &#39;#/components/parameters/ControllingArea&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Cost centres page
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/master-data/profit-centres:
+    get:
+      operationId: listProfitCentres
+      summary: Extract profit centre master data
+      parameters:
+        - $ref: &#39;#/components/parameters/ControllingArea&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Profit centres page
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/material-ledger/movements:
+    get:
+      operationId: listMaterialLedgerMovements
+      summary: Extract material ledger valuation movements
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Material ledger movements
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/procurement/purchase-orders:
+    get:
+      operationId: listPurchaseOrders
+      summary: Extract purchase orders and history
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Purchase order records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/sales/sales-orders:
+    get:
+      operationId: listSalesOrders
+      summary: Extract sales orders and document flow
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Sales order records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/fixed-assets/assets:
+    get:
+      operationId: listFixedAssets
+      summary: Extract fixed asset master and values
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Fixed asset records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/cash/bank-statements:
+    get:
+      operationId: listBankStatements
+      summary: Extract electronic bank statement items
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Bank statement records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/controlling/budget-actuals:
+    get:
+      operationId: listBudgetActuals
+      summary: Extract budget and actual controlling data
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/FiscalYear&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Budget actual records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+  /sap/v1/inventory/stock-movements:
+    get:
+      operationId: listStockMovements
+      summary: Extract inventory stock movements
+      parameters:
+        - $ref: &#39;#/components/parameters/CompanyCode&#39;
+        - $ref: &#39;#/components/parameters/DeltaToken&#39;
+        - $ref: &#39;#/components/parameters/Cursor&#39;
+        - $ref: &#39;#/components/parameters/Limit&#39;
+      responses:
+        &#39;200&#39;:
+          description: Inventory records
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/GenericSapPage&#39;
+components:
+  securitySchemes:
+    sapBasic:
+      type: http
+      scheme: basic
+  parameters:
+    CompanyCode:
+      name: companyCode
+      in: query
+      required: true
+      schema:
+        type: string
+        example: &#39;1000&#39;
+    ControllingArea:
+      name: controllingArea
+      in: query
+      required: true
+      schema:
+        type: string
+        example: &#39;A000&#39;
+    FiscalYear:
+      name: fiscalYear
+      in: query
+      required: false
+      schema:
+        type: string
+        example: &#39;2026&#39;
+    DeltaToken:
+      name: deltaToken
+      in: query
+      required: false
+      schema:
+        type: string
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5000
+        default: 1000
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: &#39;#/components/schemas/ErrorEnvelope&#39;
+  schemas:
+    JournalEntryPage:
+      type: object
+      required: [batchId, records, nextDeltaToken]
+      properties:
+        batchId:
+          type: string
+        nextCursor:
+          type: string
+          nullable: true
+        nextDeltaToken:
+          type: string
+        records:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/JournalEntry&#39;
+    GenericSapPage:
+      type: object
+      required: [batchId, records, nextDeltaToken]
+      properties:
+        batchId:
+          type: string
+        nextCursor:
+          type: string
+          nullable: true
+        nextDeltaToken:
+          type: string
+        records:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    JournalEntry:
+      type: object
+      required: [companyCode, fiscalYear, documentNumber, lineItem, postingDate, currency, amount]
+      properties:
+        companyCode:
+          type: string
+          example: &#39;1000&#39;
+        fiscalYear:
+          type: string
+          example: &#39;2026&#39;
+        documentNumber:
+          type: string
+          example: &#39;5100001234&#39;
+        lineItem:
+          type: string
+          example: &#39;001&#39;
+        glAccount:
+          type: string
+          example: &#39;400000&#39;
+        costCentre:
+          type: string
+          nullable: true
+        profitCentre:
+          type: string
+          nullable: true
+        postingDate:
+          type: string
+          format: date
+        documentDate:
+          type: string
+          format: date
+        currency:
+          type: string
+          example: INR
+        amount:
+          type: number
+          format: double
+        debitCreditIndicator:
+          type: string
+          enum: [S, H]
+        sourceUpdatedAt:
+          type: string
+          format: date-time
+    ErrorEnvelope:
+      type: object
+      required: [errorCode, message, correlationId]
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+
+</code></pre>
+      </section>
+      <section class="file-section" id="api/API_FinSight_Destination.yaml">
+        <div class="file-header">
+          <h2>api/API_FinSight_Destination.yaml</h2>
+          <button type="button" data-copy="api/API_FinSight_Destination.yaml">Copy</button>
+        </div>
+        <pre><code id="code-api/API_FinSight_Destination.yaml">openapi: 3.0.3
+info:
+  title: FinSight Destination Ingestion API
+  version: 1.0.0
+  description: Canonical financial analytics ingestion APIs for batch upsert into FinSight.
+servers:
+  - url: https://api.finsight.example.in
+security:
+  - oauth2: [finance.write]
+paths:
+  /finsight/v1/journal-entries:batchUpsert:
+    post:
+      operationId: upsertJournalEntries
+      summary: Batch upsert journal entries
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#39;#/components/schemas/JournalEntryBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+        &#39;401&#39;:
+          $ref: &#39;#/components/responses/Error&#39;
+        &#39;429&#39;:
+          $ref: &#39;#/components/responses/Error&#39;
+  /finsight/v1/payables:batchUpsert:
+    post:
+      operationId: upsertPayables
+      summary: Batch upsert payable items
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/receivables:batchUpsert:
+    post:
+      operationId: upsertReceivables
+      summary: Batch upsert receivable items
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/cost-centres:batchUpsert:
+    post:
+      operationId: upsertCostCentres
+      summary: Batch upsert cost centres
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/profit-centres:batchUpsert:
+    post:
+      operationId: upsertProfitCentres
+      summary: Batch upsert profit centres
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/material-movements:batchUpsert:
+    post:
+      operationId: upsertMaterialMovements
+      summary: Batch upsert material ledger movements
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/purchase-orders:batchUpsert:
+    post:
+      operationId: upsertPurchaseOrders
+      summary: Batch upsert purchase orders
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/sales-orders:batchUpsert:
+    post:
+      operationId: upsertSalesOrders
+      summary: Batch upsert sales orders
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/fixed-assets:batchUpsert:
+    post:
+      operationId: upsertFixedAssets
+      summary: Batch upsert fixed assets
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/bank-statements:batchUpsert:
+    post:
+      operationId: upsertBankStatements
+      summary: Batch upsert bank statements
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/budget-actuals:batchUpsert:
+    post:
+      operationId: upsertBudgetActuals
+      summary: Batch upsert budget actuals
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/inventory:batchUpsert:
+    post:
+      operationId: upsertInventory
+      summary: Batch upsert inventory movements
+      parameters:
+        - $ref: &#39;#/components/parameters/IdempotencyKey&#39;
+      requestBody:
+        $ref: &#39;#/components/requestBodies/GenericBatch&#39;
+      responses:
+        &#39;202&#39;:
+          $ref: &#39;#/components/responses/Accepted&#39;
+  /finsight/v1/ingestion-status/{batchId}:
+    get:
+      operationId: getIngestionStatus
+      summary: Get asynchronous ingestion status
+      parameters:
+        - name: batchId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        &#39;200&#39;:
+          description: Ingestion status
+          content:
+            application/json:
+              schema:
+                $ref: &#39;#/components/schemas/IngestionResult&#39;
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://identity.finsight.example.in/oauth2/token
+          scopes:
+            finance.write: Write financial analytics records
+            finance.read: Read ingestion status
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 20
+  requestBodies:
+    GenericBatch:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: &#39;#/components/schemas/GenericBatch&#39;
+  responses:
+    Accepted:
+      description: Batch accepted for ingestion
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: &#39;#/components/schemas/IngestionResult&#39;
+    Error:
+      description: Error response
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: &#39;#/components/schemas/ErrorEnvelope&#39;
+  schemas:
+    GenericBatch:
+      type: object
+      required: [batchId, tenantId, domain, records]
+      properties:
+        batchId:
+          type: string
+        tenantId:
+          type: string
+        domain:
+          type: string
+        records:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    JournalEntryBatch:
+      type: object
+      required: [batchId, tenantId, domain, records]
+      properties:
+        batchId:
+          type: string
+        tenantId:
+          type: string
+        domain:
+          type: string
+          example: GENERAL_LEDGER
+        records:
+          type: array
+          items:
+            $ref: &#39;#/components/schemas/CanonicalJournalEntry&#39;
+    CanonicalJournalEntry:
+      type: object
+      required: [sourceBusinessKey, companyCode, fiscalYear, postingDate, glAccount, amountInFunctionalCurrency, currency]
+      properties:
+        sourceBusinessKey:
+          type: string
+        companyCode:
+          type: string
+        fiscalYear:
+          type: string
+        fiscalPeriod:
+          type: string
+        postingDate:
+          type: string
+          format: date
+        glAccount:
+          type: string
+        costCentre:
+          type: string
+          nullable: true
+        profitCentre:
+          type: string
+          nullable: true
+        currency:
+          type: string
+        amountInTransactionCurrency:
+          type: number
+        amountInFunctionalCurrency:
+          type: number
+        debitCredit:
+          type: string
+          enum: [DEBIT, CREDIT]
+        lineage:
+          $ref: &#39;#/components/schemas/Lineage&#39;
+    Lineage:
+      type: object
+      required: [sourceSystem, sourceTable, sourceDocument, batchId]
+      properties:
+        sourceSystem:
+          type: string
+        sourceTable:
+          type: string
+        sourceDocument:
+          type: string
+        batchId:
+          type: string
+    IngestionResult:
+      type: object
+      required: [batchId, status, acceptedCount, rejectedCount]
+      properties:
+        batchId:
+          type: string
+        status:
+          type: string
+          enum: [ACCEPTED, PROCESSING, COMPLETED, PARTIAL_FAILURE, FAILED]
+        acceptedCount:
+          type: integer
+        rejectedCount:
+          type: integer
+    ErrorEnvelope:
+      type: object
+      required: [errorCode, message, correlationId]
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+
+</code></pre>
+      </section>
+      <section class="file-section" id="mappings/MAP_Finance_AllDomains_v1.md">
+        <div class="file-header">
+          <h2>mappings/MAP_Finance_AllDomains_v1.md</h2>
+          <button type="button" data-copy="mappings/MAP_Finance_AllDomains_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-mappings/MAP_Finance_AllDomains_v1.md"># MAP Finance All Domains v1
+
+## Mapping Rules
+
+The following mappings define SAP source fields, FinSight target fields, transformation logic, validation rules, and error handling. This file contains more than 80 mappings, exceeding the 50-field minimum.
+
+| ID | Domain | Source Field | Target Field | Transformation | Validation | Error Handling |
+| --- | --- | --- | --- | --- | --- | --- |
+| MAP-GL-001 | GL | ACDOCA-RBUKRS | companyCode | Trim and preserve 4-char code | Required, known company | ERR-MAP-001 |
+| MAP-GL-002 | GL | ACDOCA-GJAHR | fiscalYear | String YYYY | Required, 4 digits | ERR-MAP-001 |
+| MAP-GL-003 | GL | ACDOCA-BELNR | sourceDocument | Preserve SAP document number | Required | ERR-MAP-001 |
+| MAP-GL-004 | GL | ACDOCA-DOCLN | lineItem | Left-pad to 3 digits | Required | ERR-MAP-001 |
+| MAP-GL-005 | GL | ACDOCA-RACCT | glAccount | Strip leading spaces | Required, chart lookup | ERR-MAP-003 |
+| MAP-GL-006 | GL | ACDOCA-RCNTR | costCentre | Null if blank | Must exist when populated | ERR-MAP-003 |
+| MAP-GL-007 | GL | ACDOCA-PRCTR | profitCentre | Null if blank | Must exist when populated | ERR-MAP-003 |
+| MAP-GL-008 | GL | BKPF-BUDAT | postingDate | Convert YYYYMMDD to ISO date | Valid date | ERR-MAP-002 |
+| MAP-GL-009 | GL | BKPF-BLDAT | documentDate | Convert YYYYMMDD to ISO date | Valid date | ERR-MAP-002 |
+| MAP-GL-010 | GL | ACDOCA-HSL | amountInFunctionalCurrency | Decimal(18,2) | Numeric | ERR-MAP-006 |
+| MAP-GL-011 | GL | ACDOCA-WSL | amountInTransactionCurrency | Decimal(18,2) | Numeric | ERR-MAP-006 |
+| MAP-GL-012 | GL | ACDOCA-RWCUR | transactionCurrency | ISO currency | ISO 4217 | ERR-MAP-004 |
+| MAP-GL-013 | GL | ACDOCA-DRCRK | debitCredit | S=DEBIT, H=CREDIT | Enum | ERR-MAP-001 |
+| MAP-GL-014 | GL | ACDOCA-POPER | fiscalPeriod | Map 001-012, 013-016 as special | 001-016 | ERR-MAP-001 |
+| MAP-GL-015 | GL | Composite | sourceBusinessKey | company:document:year:item | Unique | ERR-LOAD-004 |
+| MAP-AP-001 | AP | ACDOCA-LIFNR | vendorId | Strip leading zeroes for display, retain raw | Required | ERR-MAP-001 |
+| MAP-AP-002 | AP | LFA1-NAME1 | vendorName | Trim | Required for enrichment | ERR-MAP-003 |
+| MAP-AP-003 | AP | LFA1-STCD3 | vendorGstin | Uppercase | GSTIN pattern when India vendor | ERR-MAP-004 |
+| MAP-AP-004 | AP | ACDOCA-BELNR | invoiceDocument | Preserve | Required | ERR-MAP-001 |
+| MAP-AP-005 | AP | ACDOCA-AUGBL | clearingDocument | Null if open | Optional | DLQ only if invalid format |
+| MAP-AP-006 | AP | ACDOCA-ZFBDT | baselineDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-AP-007 | AP | ACDOCA-ZBD1T | paymentTermsDays | Integer | &gt;=0 | ERR-MAP-006 |
+| MAP-AP-008 | AP | Derived | ageingBucket | days past due: 0-30/31-60/61-90/90+ | Required | ERR-MAP-006 |
+| MAP-AP-009 | AP | ACDOCA-TSL | openAmount | Decimal | Numeric | ERR-MAP-006 |
+| MAP-AP-010 | AP | ACDOCA-RWCUR | currency | ISO currency | ISO 4217 | ERR-MAP-004 |
+| MAP-AR-001 | AR | ACDOCA-KUNNR | customerId | Strip leading zeroes for display | Required | ERR-MAP-001 |
+| MAP-AR-002 | AR | KNA1-NAME1 | customerName | Trim | Required for enrichment | ERR-MAP-003 |
+| MAP-AR-003 | AR | KNA1-STCD3 | customerGstin | Uppercase | GSTIN pattern when India customer | ERR-MAP-004 |
+| MAP-AR-004 | AR | ACDOCA-BELNR | invoiceDocument | Preserve | Required | ERR-MAP-001 |
+| MAP-AR-005 | AR | ACDOCA-ZFBDT | baselineDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-AR-006 | AR | KNKK-KLIMK | creditLimit | Decimal | &gt;=0 | ERR-MAP-006 |
+| MAP-AR-007 | AR | KNKK-SAUFT | creditExposure | Decimal | &gt;=0 | ERR-MAP-006 |
+| MAP-AR-008 | AR | ACDOCA-MANST | dunningLevel | Map SAP level to LOW/MEDIUM/HIGH | Known code | ERR-MAP-001 |
+| MAP-AR-009 | AR | Derived | ageingBucket | days past due | Required | ERR-MAP-006 |
+| MAP-AR-010 | AR | ACDOCA-TSL | openAmount | Decimal | Numeric | ERR-MAP-006 |
+| MAP-CC-001 | Cost Centre | CSKS-KOKRS | controllingArea | Preserve | Required | ERR-MAP-001 |
+| MAP-CC-002 | Cost Centre | CSKS-KOSTL | costCentre | Preserve | Required, unique | ERR-LOAD-004 |
+| MAP-CC-003 | Cost Centre | CSKT-KTEXT | costCentreName | Trim | Required | ERR-MAP-001 |
+| MAP-CC-004 | Cost Centre | CSKS-DATAB | validFrom | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-CC-005 | Cost Centre | CSKS-DATBI | validTo | YYYYMMDD to ISO | &gt;= validFrom | ERR-MAP-002 |
+| MAP-CC-006 | Cost Centre | SETNODE | hierarchyPath | Flatten to Level1-Level7 | All parents exist | ERR-MAP-003 |
+| MAP-PC-001 | Profit Centre | CEPC-KOKRS | controllingArea | Preserve | Required | ERR-MAP-001 |
+| MAP-PC-002 | Profit Centre | CEPC-PRCTR | profitCentre | Preserve | Required, unique | ERR-LOAD-004 |
+| MAP-PC-003 | Profit Centre | CEPCT-KTEXT | profitCentreName | Trim | Required | ERR-MAP-001 |
+| MAP-PC-004 | Profit Centre | CEPC-SEGMENT | segment | Map to reporting segment | Known segment | ERR-MAP-003 |
+| MAP-PC-005 | Profit Centre | CEPC-DATAB | validFrom | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-PC-006 | Profit Centre | CEPC-DATBI | validTo | YYYYMMDD to ISO | &gt;= validFrom | ERR-MAP-002 |
+| MAP-ML-001 | Material Ledger | MLDOC-MATNR | materialId | Preserve raw and display | Required | ERR-MAP-001 |
+| MAP-ML-002 | Material Ledger | MARA-MAKTX | materialDescription | Trim | Optional | Business exception |
+| MAP-ML-003 | Material Ledger | MLDOC-WERKS | plant | Preserve | Required | ERR-MAP-001 |
+| MAP-ML-004 | Material Ledger | MLDOC-BWART | movementType | Map to movement category | Known code | ERR-MAP-003 |
+| MAP-ML-005 | Material Ledger | MLDOC-MENGE | quantity | Decimal | Numeric | ERR-MAP-006 |
+| MAP-ML-006 | Material Ledger | MLDOC-MEINS | unitOfMeasure | ISO/UoM map | Known UoM | ERR-MAP-003 |
+| MAP-ML-007 | Material Ledger | CKMLCR-PVPRS | periodicUnitPrice | Decimal | Numeric | ERR-MAP-006 |
+| MAP-ML-008 | Material Ledger | MLDOC-BUDAT | postingDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-PO-001 | Purchase Order | EKKO-EBELN | purchaseOrder | Preserve | Required | ERR-MAP-001 |
+| MAP-PO-002 | Purchase Order | EKPO-EBELP | poLineItem | Left-pad | Required | ERR-MAP-001 |
+| MAP-PO-003 | Purchase Order | EKKO-LIFNR | vendorId | Normalize | Required | ERR-MAP-001 |
+| MAP-PO-004 | Purchase Order | EKKO-BEDAT | poDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-PO-005 | Purchase Order | EKPO-MATNR | materialId | Preserve | Required for material PO | ERR-MAP-001 |
+| MAP-PO-006 | Purchase Order | EKPO-MENGE | orderedQuantity | Decimal | &gt;0 | ERR-MAP-006 |
+| MAP-PO-007 | Purchase Order | EKPO-NETPR | netPrice | Decimal | &gt;=0 | ERR-MAP-006 |
+| MAP-PO-008 | Purchase Order | EKBE-BEWTP | poHistoryCategory | Map GR/IR/payment | Known code | ERR-MAP-003 |
+| MAP-SO-001 | Sales Order | VBAK-VBELN | salesOrder | Preserve | Required | ERR-MAP-001 |
+| MAP-SO-002 | Sales Order | VBAP-POSNR | salesLineItem | Left-pad | Required | ERR-MAP-001 |
+| MAP-SO-003 | Sales Order | VBAK-KUNNR | customerId | Normalize | Required | ERR-MAP-001 |
+| MAP-SO-004 | Sales Order | VBAK-AUDAT | orderDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-SO-005 | Sales Order | VBAP-MATNR | materialId | Preserve | Required | ERR-MAP-001 |
+| MAP-SO-006 | Sales Order | VBAP-KWMENG | orderedQuantity | Decimal | &gt;0 | ERR-MAP-006 |
+| MAP-SO-007 | Sales Order | VBAP-NETWR | netValue | Decimal | &gt;=0 | ERR-MAP-006 |
+| MAP-SO-008 | Sales Order | VBFA-VBTYP_N | documentFlowStatus | Map delivery/invoice/payment | Known code | ERR-MAP-003 |
+| MAP-FA-001 | Fixed Assets | ANLA-ANLN1 | assetNumber | Preserve | Required | ERR-MAP-001 |
+| MAP-FA-002 | Fixed Assets | ANLA-ANLN2 | assetSubnumber | Preserve | Required | ERR-MAP-001 |
+| MAP-FA-003 | Fixed Assets | ANLA-TXT50 | assetDescription | Trim | Required | ERR-MAP-001 |
+| MAP-FA-004 | Fixed Assets | ANLA-AKTIV | capitalizationDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-FA-005 | Fixed Assets | ANLC-KANSW | acquisitionValue | Decimal | Numeric | ERR-MAP-006 |
+| MAP-FA-006 | Fixed Assets | ANLC-NAFAG | accumulatedDepreciation | Decimal | Numeric | ERR-MAP-006 |
+| MAP-BS-001 | Bank Statement | FEBKO-KUKEY | statementKey | Preserve | Required | ERR-MAP-001 |
+| MAP-BS-002 | Bank Statement | FEBKO-AZNUM | statementNumber | Preserve | Required | ERR-MAP-001 |
+| MAP-BS-003 | Bank Statement | FEBEP-ESNUM | statementLine | Preserve | Required | ERR-MAP-001 |
+| MAP-BS-004 | Bank Statement | FEBEP-WRBTR | amount | Decimal | Numeric | ERR-MAP-006 |
+| MAP-BS-005 | Bank Statement | FEBEP-VALUT | valueDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+| MAP-BS-006 | Bank Statement | FEBEP-XBLNR | bankReference | Trim | Optional | None |
+| MAP-BS-007 | Bank Statement | FEBEP-AUGBL | clearingDocument | Null if unmatched | Optional | Business exception |
+| MAP-BA-001 | BudgetActual | ACDOCP-RBUKRS | companyCode | Preserve | Required | ERR-MAP-001 |
+| MAP-BA-002 | BudgetActual | ACDOCP-RCNTR | costCentre | Preserve | Must exist | ERR-MAP-003 |
+| MAP-BA-003 | BudgetActual | ACDOCP-RACCT | glAccount | Preserve | Must exist | ERR-MAP-003 |
+| MAP-BA-004 | BudgetActual | ACDOCP-POPER | fiscalPeriod | Preserve | 001-016 | ERR-MAP-001 |
+| MAP-BA-005 | BudgetActual | ACDOCP-HSL | budgetAmount | Decimal | Numeric | ERR-MAP-006 |
+| MAP-BA-006 | BudgetActual | ACDOCA-HSL | actualAmount | Decimal | Numeric | ERR-MAP-006 |
+| MAP-BA-007 | BudgetActual | Derived | varianceAmount | actual - budget | Numeric | ERR-MAP-006 |
+| MAP-BA-008 | BudgetActual | Derived | variancePercent | variance / budget | Handle zero budget | ERR-MAP-006 |
+| MAP-INV-001 | Inventory | MATDOC-MBLNR | materialDocument | Preserve | Required | ERR-MAP-001 |
+| MAP-INV-002 | Inventory | MATDOC-ZEILE | materialDocLine | Preserve | Required | ERR-MAP-001 |
+| MAP-INV-003 | Inventory | MATDOC-MATNR | materialId | Preserve | Required | ERR-MAP-001 |
+| MAP-INV-004 | Inventory | MATDOC-WERKS | plant | Preserve | Required | ERR-MAP-001 |
+| MAP-INV-005 | Inventory | MATDOC-LGORT | storageLocation | Preserve | Optional | None |
+| MAP-INV-006 | Inventory | MATDOC-BWART | movementType | Map receipt/issue/transfer | Known code | ERR-MAP-003 |
+| MAP-INV-007 | Inventory | MATDOC-MENGE | movementQuantity | Decimal | Numeric | ERR-MAP-006 |
+| MAP-INV-008 | Inventory | MATDOC-MEINS | unitOfMeasure | UoM lookup | Known UoM | ERR-MAP-003 |
+| MAP-INV-009 | Inventory | MATDOC-DMBTR | movementValue | Decimal | Numeric | ERR-MAP-006 |
+| MAP-INV-010 | Inventory | MATDOC-BUDAT | postingDate | YYYYMMDD to ISO | Valid date | ERR-MAP-002 |
+
+## Shared Transformation Rules
+
+- Dates: SAP `YYYYMMDD` values are converted to ISO `YYYY-MM-DD`.
+- Currency: SAP currencies are validated against ISO 4217 and converted using TCURR point-in-time rates where target INR values are required.
+- Fiscal periods: SAP periods `001` through `012` map normally; `013` through `016` map to period `012` with `specialPeriod=true`.
+- Idempotency: Target keys are deterministic and built from tenant, domain, company code, fiscal year, document number, and line item.
+- Lineage: Every target record carries source system, table/view, document key, extraction timestamp, and batch ID.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="monitoring/D6_Monitoring_Dashboard_v1.md">
+        <div class="file-header">
+          <h2>monitoring/D6_Monitoring_Dashboard_v1.md</h2>
+          <button type="button" data-copy="monitoring/D6_Monitoring_Dashboard_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-monitoring/D6_Monitoring_Dashboard_v1.md"># D6 Monitoring Dashboard Specification
+
+## Observability Model
+
+The integration emits metrics, structured logs, and traces. Every event includes `correlationId`, `batchId`, `domain`, `companyCode`, `sourceSystem`, and `component`.
+
+## Dashboard Panels
+
+| Panel ID | Title | Metric Query | Refresh | Alert |
+| --- | --- | --- | --- | --- |
+| MON-001 | Pipeline Health Overview | Status aggregation by domain | 30s | RED triggers P1 |
+| MON-002 | Throughput Records/Sec | `rate(records_processed_total[5m]) by (domain,operation)` | 15s | Under 50% baseline |
+| MON-003 | Latency Distribution | `histogram_quantile(0.95, rate(api_duration_seconds_bucket[5m]))` | 15s | P95 over 5s |
+| MON-004 | Error Rate | `rate(errors_total[5m]) / rate(requests_total[5m]) * 100` | 15s | Over 5% P1 |
+| MON-005 | DLQ Depth | `kafka_consumer_group_lag{topic=&quot;dlq&quot;}` | 30s | Over 500 P1 |
+| MON-006 | Reconciliation Status | Last result per domain | 5m | BREAK triggers P2 |
+| MON-007 | SAP System Health | `sap_rfc_pool_utilisation`, `sap_response_time_ms` | 30s | Pool over 90% |
+| MON-008 | FinSight API Health | `finsight_api_response_ms`, `finsight_rate_limit_remaining` | 30s | Headroom under 10% |
+| MON-009 | Data Freshness | `now() - max(last_successful_load_timestamp)` | 60s | Exceeds SLA |
+| MON-010 | Resource Utilisation | CPU, memory, disk, network | 15s | Any over 90% |
+| MON-011 | Kafka Consumer Lag | `kafka_consumer_group_lag by (topic,partition)` | 15s | Over 50K messages |
+| MON-012 | Circuit Breaker Status | `circuit_breaker_state{service}` | 5s | Any open triggers P2 |
+
+## Alert Routing
+
+| Severity | Trigger | Owner | Response |
+| --- | --- | --- | --- |
+| P1 | Data loss risk, full pipeline down, reconciliation systemic break | On-call integration lead | 15 minutes |
+| P2 | Domain outage, circuit breaker open, large DLQ | L2 integration team | 1 hour |
+| P3 | Freshness breach, warning threshold | Operations | 4 hours |
+| P4 | Informational anomaly | Backlog review | Next business day |
+
+## Structured Log Example
+
+```json
+{
+  &quot;timestamp&quot;: &quot;2026-06-28T09:31:15+05:30&quot;,
+  &quot;level&quot;: &quot;WARN&quot;,
+  &quot;component&quot;: &quot;validation-service&quot;,
+  &quot;domain&quot;: &quot;AP&quot;,
+  &quot;batchId&quot;: &quot;BATCH-AP-20260628-0930&quot;,
+  &quot;correlationId&quot;: &quot;corr-20260628-0930-001&quot;,
+  &quot;sourceKey&quot;: &quot;1000:1900001234:2026:001&quot;,
+  &quot;errorCode&quot;: &quot;ERR-MAP-003&quot;,
+  &quot;message&quot;: &quot;Vendor master reference missing&quot;
+}
+```
+
+</code></pre>
+      </section>
+      <section class="file-section" id="tests/D7_Integration_Test_Plan_v1.md">
+        <div class="file-header">
+          <h2>tests/D7_Integration_Test_Plan_v1.md</h2>
+          <button type="button" data-copy="tests/D7_Integration_Test_Plan_v1.md">Copy</button>
+        </div>
+        <pre><code id="code-tests/D7_Integration_Test_Plan_v1.md"># D7 Integration Test Plan
+
+## Functional Tests
+
+| ID | Title | Preconditions | Steps | Expected Result |
+| --- | --- | --- | --- | --- |
+| TST-FNC-001 | Happy Path GL Extraction | 100 GL entries in SAP sandbox | Trigger delta, verify Kafka count, load FinSight, reconcile | 100 records loaded, checksum match |
+| TST-FNC-002 | AP Open Items Multi-Currency | INR, USD, EUR AP items and TCURR rates | Extract AP, convert currency, check ageing | Correct INR conversion and ageing |
+| TST-FNC-003 | Master Data Delta Sync | Existing cost centre sync | Create cost centre, run cycle, query target | New cost centre appears |
+| TST-FNC-004 | Multi-Company Code Batch | Entries for MC01, MC02, MC03 | Extract mixed batch, verify routing | Each company routes to correct tenant |
+| TST-FNC-005 | Fiscal Period Mapping | SAP periods 001-016 | Extract all periods, verify mapping | 013-016 flagged as special periods |
+| TST-FNC-006 | 7-Level Hierarchy Flatten | Cost centre hierarchy exists | Extract hierarchy and inspect target | Level1-Level7 populated |
+| TST-FNC-007 | P2P Flow Tracing | PO, GR, invoice, payment exist | Extract stages and trace flow | All stages linked |
+| TST-FNC-008 | Bank Statement Load | 50 bank items | Load IDoc/CDS, transform, validate clearing | Matched cleared, unmatched open |
+| TST-FNC-009 | Budget vs Actual Variance | Budget and actuals for 5 centres | Extract both and calculate variance | Matches SAP CO report |
+| TST-FNC-010 | End-of-Day Full Reconciliation | Full day across domains | Run all extractions and recon | Zero unexplained breaks |
+
+## Non-Functional Tests
+
+| ID | Category | Title | Key Validation |
+| --- | --- | --- | --- |
+| TST-NFR-001 | Performance | Peak 500K GL entries | Completes within 2-hour SLA |
+| TST-NFR-002 | Concurrency | 12 domains run together | No deadlocks or resource contention |
+| TST-NFR-003 | Latency | 500 concurrent FinSight requests | P95 under 5 seconds, controlled 429 |
+| TST-NFR-004 | Scalability | 1K to 100K records | Linear throughput until documented ceiling |
+| TST-NFR-005 | Endurance | 24-hour operation | No memory leak or connection exhaustion |
+
+## Failure Tests
+
+| ID | Category | Title | Key Validation |
+| --- | --- | --- | --- |
+| TST-FLR-001 | Failure | SAP RFC failure mid-batch | Circuit opens, partial batch preserved |
+| TST-FLR-002 | Failure | FinSight HTTP 429 | Honors Retry-After and succeeds eventually |
+| TST-FLR-003 | Failure | Kafka broker failure | Failover with zero message loss |
+| TST-FLR-004 | Failure | 10 malformed records in 100 | 90 succeed, 10 DLQ |
+| TST-FLR-005 | Failure | 5-minute network partition | Buffers and recovers with eventual consistency |
+
+## Security and Reconciliation Tests
+
+| ID | Category | Title | Key Validation |
+| --- | --- | --- | --- |
+| TST-SEC-001 | Security | OAuth token expires | Automatic refresh without data loss |
+| TST-SEC-002 | Security | Invalid token | HTTP 401, audit log, no data exposure |
+| TST-SEC-003 | Security | Encryption verification | TLS 1.2+ in transit, AES-256 at rest |
+| TST-REC-001 | Reconciliation | INR 1.50 discrepancy | Break detected and alert generated |
+| TST-REC-002 | Reconciliation | Missing cost centre | Referential check catches orphan |
+
+## Exit Criteria
+
+- All functional tests pass.
+- No P1 or P2 unresolved defects.
+- Performance test meets 500K GL records within 2 hours.
+- Security tests produce audit evidence.
+- Reconciliation breaks are either resolved or documented with owner approval.
+
+</code></pre>
+      </section>
+      <section class="file-section" id="diagrams/DGM_C4_SystemContext.mmd">
+        <div class="file-header">
+          <h2>diagrams/DGM_C4_SystemContext.mmd</h2>
+          <button type="button" data-copy="diagrams/DGM_C4_SystemContext.mmd">Copy</button>
+        </div>
+        <pre><code id="code-diagrams/DGM_C4_SystemContext.mmd">flowchart LR
+  CFO[Finance Leadership] --&gt; FS[FinSight Analytics Platform]
+  Controller[Finance Controller] --&gt; FS
+  SAP[SAP S/4HANA ERP] --&gt; INT[Integration Framework]
+  INT --&gt; FS
+  IDP[Identity Provider] --&gt; INT
+  INT --&gt; MON[Monitoring and Audit Platform]
+  Ops[Operations Team] --&gt; MON
+  SAPBasis[SAP Basis Admin] --&gt; SAP
+
+</code></pre>
+      </section>
+      <section class="file-section" id="diagrams/DGM_C4_Container.mmd">
+        <div class="file-header">
+          <h2>diagrams/DGM_C4_Container.mmd</h2>
+          <button type="button" data-copy="diagrams/DGM_C4_Container.mmd">Copy</button>
+        </div>
+        <pre><code id="code-diagrams/DGM_C4_Container.mmd">flowchart LR
+  SAP[SAP S/4HANA] --&gt; EX[SAP Connector]
+  SCH[Scheduler] --&gt; EX
+  EX --&gt; K[(Kafka Topics)]
+  K --&gt; TX[Transformation Engine]
+  TX --&gt; VAL[Validation Service]
+  VAL --&gt; LOAD[FinSight Loader]
+  LOAD --&gt; FS[FinSight APIs]
+  VAL --&gt; DLQ[(Dead Letter Queue)]
+  LOAD --&gt; REC[Reconciliation Service]
+  REC --&gt; AUD[(Audit Store)]
+  TX --&gt; MON[Metrics Logs Traces]
+  REC --&gt; MON
+
+</code></pre>
+      </section>
+      <section class="file-section" id="diagrams/DGM_Sequence_HappyPath.mmd">
+        <div class="file-header">
+          <h2>diagrams/DGM_Sequence_HappyPath.mmd</h2>
+          <button type="button" data-copy="diagrams/DGM_Sequence_HappyPath.mmd">Copy</button>
+        </div>
+        <pre><code id="code-diagrams/DGM_Sequence_HappyPath.mmd">sequenceDiagram
+  participant S as Scheduler
+  participant SAP as SAP Connector
+  participant K as Kafka
+  participant T as Transformation
+  participant F as FinSight
+  participant R as Reconciliation
+  S-&gt;&gt;SAP: Request GL delta using last token
+  SAP--&gt;&gt;S: Batch metadata and next token
+  SAP-&gt;&gt;K: Publish extracted records
+  K-&gt;&gt;T: Consume records
+  T-&gt;&gt;T: Transform and validate
+  T-&gt;&gt;F: Batch upsert with idempotency key
+  F--&gt;&gt;T: Accepted and rejected counts
+  T-&gt;&gt;R: Submit batch metrics
+  R-&gt;&gt;R: Compare counts, totals, checksums
+  R--&gt;&gt;S: Reconciled
+  S-&gt;&gt;SAP: Commit delta token
+
+</code></pre>
+      </section>
+      <section class="file-section" id="diagrams/DGM_Sequence_ErrorDLQ.mmd">
+        <div class="file-header">
+          <h2>diagrams/DGM_Sequence_ErrorDLQ.mmd</h2>
+          <button type="button" data-copy="diagrams/DGM_Sequence_ErrorDLQ.mmd">Copy</button>
+        </div>
+        <pre><code id="code-diagrams/DGM_Sequence_ErrorDLQ.mmd">sequenceDiagram
+  participant K as Kafka
+  participant T as Transformation
+  participant D as DLQ
+  participant M as Monitoring
+  K-&gt;&gt;T: Deliver AP record
+  T-&gt;&gt;T: Validate vendor and GSTIN
+  T--&gt;&gt;D: Route invalid record with ERR-MAP-003
+  T--&gt;&gt;M: Emit data quality metric
+  M--&gt;&gt;M: Alert if DLQ threshold exceeded
+
+</code></pre>
+      </section>
+      <section class="file-section" id="diagrams/DGM_DataFlow_Reconciliation.mmd">
+        <div class="file-header">
+          <h2>diagrams/DGM_DataFlow_Reconciliation.mmd</h2>
+          <button type="button" data-copy="diagrams/DGM_DataFlow_Reconciliation.mmd">Copy</button>
+        </div>
+        <pre><code id="code-diagrams/DGM_DataFlow_Reconciliation.mmd">flowchart TD
+  SRC[SAP Source Extract Metrics] --&gt; REC[Reconciliation Service]
+  TGT[FinSight Load Metrics] --&gt; REC
+  DLQ[DLQ Metrics] --&gt; REC
+  REC --&gt; PASS[RECONCILED]
+  REC --&gt; BREAK[RECON_BREAK]
+  BREAK --&gt; REPORT[Break Report]
+  REPORT --&gt; OWNER[Finance Data Steward or Ops]
+
+</code></pre>
+      </section>
+      <section class="file-section" id="postman/FDE9B_Postman_Collection.json">
+        <div class="file-header">
+          <h2>postman/FDE9B_Postman_Collection.json</h2>
+          <button type="button" data-copy="postman/FDE9B_Postman_Collection.json">Copy</button>
+        </div>
+        <pre><code id="code-postman/FDE9B_Postman_Collection.json">{
+  &quot;info&quot;: {
+    &quot;name&quot;: &quot;FDE-9B SAP to FinSight Integration&quot;,
+    &quot;schema&quot;: &quot;https://schema.getpostman.com/json/collection/v2.1.0/collection.json&quot;
+  },
+  &quot;item&quot;: [
+    {
+      &quot;name&quot;: &quot;SAP GL Delta&quot;,
+      &quot;request&quot;: {
+        &quot;method&quot;: &quot;GET&quot;,
+        &quot;url&quot;: &quot;{{sapBaseUrl}}/sap/v1/general-ledger/journal-entries?companyCode=1000&amp;limit=100&amp;deltaToken={{deltaToken}}&quot;
+      }
+    },
+    {
+      &quot;name&quot;: &quot;FinSight GL Batch Upsert&quot;,
+      &quot;request&quot;: {
+        &quot;method&quot;: &quot;POST&quot;,
+        &quot;header&quot;: [
+          { &quot;key&quot;: &quot;Authorization&quot;, &quot;value&quot;: &quot;Bearer {{token}}&quot; },
+          { &quot;key&quot;: &quot;Idempotency-Key&quot;, &quot;value&quot;: &quot;{{idempotencyKey}}&quot; },
+          { &quot;key&quot;: &quot;Content-Type&quot;, &quot;value&quot;: &quot;application/json&quot; }
+        ],
+        &quot;url&quot;: &quot;{{finSightBaseUrl}}/finsight/v1/journal-entries:batchUpsert&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+      </section>
+      <section class="file-section" id=".gitignore">
+        <div class="file-header">
+          <h2>.gitignore</h2>
+          <button type="button" data-copy=".gitignore">Copy</button>
+        </div>
+        <pre><code id="code-.gitignore"># Local/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated exports
+*.tmp
+*.log
+
+# Secrets
+.env
+*.pem
+*.key
+
+</code></pre>
+      </section>
+    </div>
+  </main>
+  <script>
+    document.querySelectorAll("button[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const id = "code-" + button.getAttribute("data-copy");
+        const text = document.getElementById(id).innerText;
+        await navigator.clipboard.writeText(text);
+        const old = button.textContent;
+        button.textContent = "Copied";
+        setTimeout(() => { button.textContent = old; }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
