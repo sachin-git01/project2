@@ -1,0 +1,27 @@
+{
+  "info": {
+    "name": "FDE-9B SAP to FinSight Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "SAP GL Delta",
+      "request": {
+        "method": "GET",
+        "url": "{{sapBaseUrl}}/sap/v1/general-ledger/journal-entries?companyCode=1000&limit=100&deltaToken={{deltaToken}}"
+      }
+    },
+    {
+      "name": "FinSight GL Batch Upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Idempotency-Key", "value": "{{idempotencyKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{finSightBaseUrl}}/finsight/v1/journal-entries:batchUpsert"
+      }
+    }
+  ]
+}

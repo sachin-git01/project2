@@ -1,0 +1,323 @@
+openapi: 3.0.3
+info:
+  title: FinSight Destination Ingestion API
+  version: 1.0.0
+  description: Canonical financial analytics ingestion APIs for batch upsert into FinSight.
+servers:
+  - url: https://api.finsight.example.in
+security:
+  - oauth2: [finance.write]
+paths:
+  /finsight/v1/journal-entries:batchUpsert:
+    post:
+      operationId: upsertJournalEntries
+      summary: Batch upsert journal entries
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalEntryBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+        '401':
+          $ref: '#/components/responses/Error'
+        '429':
+          $ref: '#/components/responses/Error'
+  /finsight/v1/payables:batchUpsert:
+    post:
+      operationId: upsertPayables
+      summary: Batch upsert payable items
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/receivables:batchUpsert:
+    post:
+      operationId: upsertReceivables
+      summary: Batch upsert receivable items
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/cost-centres:batchUpsert:
+    post:
+      operationId: upsertCostCentres
+      summary: Batch upsert cost centres
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/profit-centres:batchUpsert:
+    post:
+      operationId: upsertProfitCentres
+      summary: Batch upsert profit centres
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/material-movements:batchUpsert:
+    post:
+      operationId: upsertMaterialMovements
+      summary: Batch upsert material ledger movements
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/purchase-orders:batchUpsert:
+    post:
+      operationId: upsertPurchaseOrders
+      summary: Batch upsert purchase orders
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/sales-orders:batchUpsert:
+    post:
+      operationId: upsertSalesOrders
+      summary: Batch upsert sales orders
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/fixed-assets:batchUpsert:
+    post:
+      operationId: upsertFixedAssets
+      summary: Batch upsert fixed assets
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/bank-statements:batchUpsert:
+    post:
+      operationId: upsertBankStatements
+      summary: Batch upsert bank statements
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/budget-actuals:batchUpsert:
+    post:
+      operationId: upsertBudgetActuals
+      summary: Batch upsert budget actuals
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/inventory:batchUpsert:
+    post:
+      operationId: upsertInventory
+      summary: Batch upsert inventory movements
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        $ref: '#/components/requestBodies/GenericBatch'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /finsight/v1/ingestion-status/{batchId}:
+    get:
+      operationId: getIngestionStatus
+      summary: Get asynchronous ingestion status
+      parameters:
+        - name: batchId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ingestion status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionResult'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://identity.finsight.example.in/oauth2/token
+          scopes:
+            finance.write: Write financial analytics records
+            finance.read: Read ingestion status
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 20
+  requestBodies:
+    GenericBatch:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericBatch'
+  responses:
+    Accepted:
+      description: Batch accepted for ingestion
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IngestionResult'
+    Error:
+      description: Error response
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    GenericBatch:
+      type: object
+      required: [batchId, tenantId, domain, records]
+      properties:
+        batchId:
+          type: string
+        tenantId:
+          type: string
+        domain:
+          type: string
+        records:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    JournalEntryBatch:
+      type: object
+      required: [batchId, tenantId, domain, records]
+      properties:
+        batchId:
+          type: string
+        tenantId:
+          type: string
+        domain:
+          type: string
+          example: GENERAL_LEDGER
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/CanonicalJournalEntry'
+    CanonicalJournalEntry:
+      type: object
+      required: [sourceBusinessKey, companyCode, fiscalYear, postingDate, glAccount, amountInFunctionalCurrency, currency]
+      properties:
+        sourceBusinessKey:
+          type: string
+        companyCode:
+          type: string
+        fiscalYear:
+          type: string
+        fiscalPeriod:
+          type: string
+        postingDate:
+          type: string
+          format: date
+        glAccount:
+          type: string
+        costCentre:
+          type: string
+          nullable: true
+        profitCentre:
+          type: string
+          nullable: true
+        currency:
+          type: string
+        amountInTransactionCurrency:
+          type: number
+        amountInFunctionalCurrency:
+          type: number
+        debitCredit:
+          type: string
+          enum: [DEBIT, CREDIT]
+        lineage:
+          $ref: '#/components/schemas/Lineage'
+    Lineage:
+      type: object
+      required: [sourceSystem, sourceTable, sourceDocument, batchId]
+      properties:
+        sourceSystem:
+          type: string
+        sourceTable:
+          type: string
+        sourceDocument:
+          type: string
+        batchId:
+          type: string
+    IngestionResult:
+      type: object
+      required: [batchId, status, acceptedCount, rejectedCount]
+      properties:
+        batchId:
+          type: string
+        status:
+          type: string
+          enum: [ACCEPTED, PROCESSING, COMPLETED, PARTIAL_FAILURE, FAILED]
+        acceptedCount:
+          type: integer
+        rejectedCount:
+          type: integer
+    ErrorEnvelope:
+      type: object
+      required: [errorCode, message, correlationId]
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+

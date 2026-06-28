@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant S as Scheduler
+  participant SAP as SAP Connector
+  participant K as Kafka
+  participant T as Transformation
+  participant F as FinSight
+  participant R as Reconciliation
+  S->>SAP: Request GL delta using last token
+  SAP-->>S: Batch metadata and next token
+  SAP->>K: Publish extracted records
+  K->>T: Consume records
+  T->>T: Transform and validate
+  T->>F: Batch upsert with idempotency key
+  F-->>T: Accepted and rejected counts
+  T->>R: Submit batch metrics
+  R->>R: Compare counts, totals, checksums
+  R-->>S: Reconciled
+  S->>SAP: Commit delta token
+

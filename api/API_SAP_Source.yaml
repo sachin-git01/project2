@@ -1,0 +1,354 @@
+openapi: 3.0.3
+info:
+  title: SAP S/4HANA Source Extraction API
+  version: 1.0.0
+  description: Integration facade for extracting SAP S/4HANA finance and operational data.
+servers:
+  - url: https://sap-gateway.example.in
+security:
+  - sapBasic: []
+paths:
+  /sap/v1/general-ledger/journal-entries:
+    get:
+      operationId: listJournalEntries
+      summary: Extract GL journal entries from SAP Universal Journal
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/FiscalYear'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Journal entries page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntryPage'
+        '400':
+          $ref: '#/components/responses/Error'
+  /sap/v1/accounts-payable/open-items:
+    get:
+      operationId: listPayableOpenItems
+      summary: Extract AP open items
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: AP open items page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+        '400':
+          $ref: '#/components/responses/Error'
+  /sap/v1/accounts-receivable/open-items:
+    get:
+      operationId: listReceivableOpenItems
+      summary: Extract AR open items
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: AR open items page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+        '400':
+          $ref: '#/components/responses/Error'
+  /sap/v1/master-data/cost-centres:
+    get:
+      operationId: listCostCentres
+      summary: Extract cost centre master data
+      parameters:
+        - $ref: '#/components/parameters/ControllingArea'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Cost centres page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/master-data/profit-centres:
+    get:
+      operationId: listProfitCentres
+      summary: Extract profit centre master data
+      parameters:
+        - $ref: '#/components/parameters/ControllingArea'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Profit centres page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/material-ledger/movements:
+    get:
+      operationId: listMaterialLedgerMovements
+      summary: Extract material ledger valuation movements
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Material ledger movements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/procurement/purchase-orders:
+    get:
+      operationId: listPurchaseOrders
+      summary: Extract purchase orders and history
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Purchase order records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/sales/sales-orders:
+    get:
+      operationId: listSalesOrders
+      summary: Extract sales orders and document flow
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Sales order records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/fixed-assets/assets:
+    get:
+      operationId: listFixedAssets
+      summary: Extract fixed asset master and values
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Fixed asset records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/cash/bank-statements:
+    get:
+      operationId: listBankStatements
+      summary: Extract electronic bank statement items
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Bank statement records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/controlling/budget-actuals:
+    get:
+      operationId: listBudgetActuals
+      summary: Extract budget and actual controlling data
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/FiscalYear'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Budget actual records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+  /sap/v1/inventory/stock-movements:
+    get:
+      operationId: listStockMovements
+      summary: Extract inventory stock movements
+      parameters:
+        - $ref: '#/components/parameters/CompanyCode'
+        - $ref: '#/components/parameters/DeltaToken'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Inventory records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSapPage'
+components:
+  securitySchemes:
+    sapBasic:
+      type: http
+      scheme: basic
+  parameters:
+    CompanyCode:
+      name: companyCode
+      in: query
+      required: true
+      schema:
+        type: string
+        example: '1000'
+    ControllingArea:
+      name: controllingArea
+      in: query
+      required: true
+      schema:
+        type: string
+        example: 'A000'
+    FiscalYear:
+      name: fiscalYear
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '2026'
+    DeltaToken:
+      name: deltaToken
+      in: query
+      required: false
+      schema:
+        type: string
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 5000
+        default: 1000
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    JournalEntryPage:
+      type: object
+      required: [batchId, records, nextDeltaToken]
+      properties:
+        batchId:
+          type: string
+        nextCursor:
+          type: string
+          nullable: true
+        nextDeltaToken:
+          type: string
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalEntry'
+    GenericSapPage:
+      type: object
+      required: [batchId, records, nextDeltaToken]
+      properties:
+        batchId:
+          type: string
+        nextCursor:
+          type: string
+          nullable: true
+        nextDeltaToken:
+          type: string
+        records:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    JournalEntry:
+      type: object
+      required: [companyCode, fiscalYear, documentNumber, lineItem, postingDate, currency, amount]
+      properties:
+        companyCode:
+          type: string
+          example: '1000'
+        fiscalYear:
+          type: string
+          example: '2026'
+        documentNumber:
+          type: string
+          example: '5100001234'
+        lineItem:
+          type: string
+          example: '001'
+        glAccount:
+          type: string
+          example: '400000'
+        costCentre:
+          type: string
+          nullable: true
+        profitCentre:
+          type: string
+          nullable: true
+        postingDate:
+          type: string
+          format: date
+        documentDate:
+          type: string
+          format: date
+        currency:
+          type: string
+          example: INR
+        amount:
+          type: number
+          format: double
+        debitCreditIndicator:
+          type: string
+          enum: [S, H]
+        sourceUpdatedAt:
+          type: string
+          format: date-time
+    ErrorEnvelope:
+      type: object
+      required: [errorCode, message, correlationId]
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+

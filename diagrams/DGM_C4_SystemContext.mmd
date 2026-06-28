@@ -1,0 +1,10 @@
+flowchart LR
+  CFO[Finance Leadership] --> FS[FinSight Analytics Platform]
+  Controller[Finance Controller] --> FS
+  SAP[SAP S/4HANA ERP] --> INT[Integration Framework]
+  INT --> FS
+  IDP[Identity Provider] --> INT
+  INT --> MON[Monitoring and Audit Platform]
+  Ops[Operations Team] --> MON
+  SAPBasis[SAP Basis Admin] --> SAP
+

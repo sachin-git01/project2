@@ -1,0 +1,15 @@
+# Local/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated exports
+*.tmp
+*.log
+
+# Secrets
+.env
+*.pem
+*.key
+

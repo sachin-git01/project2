@@ -1,0 +1,11 @@
+sequenceDiagram
+  participant K as Kafka
+  participant T as Transformation
+  participant D as DLQ
+  participant M as Monitoring
+  K->>T: Deliver AP record
+  T->>T: Validate vendor and GSTIN
+  T-->>D: Route invalid record with ERR-MAP-003
+  T-->>M: Emit data quality metric
+  M-->>M: Alert if DLQ threshold exceeded
+

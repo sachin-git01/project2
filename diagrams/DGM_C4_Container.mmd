@@ -1,0 +1,14 @@
+flowchart LR
+  SAP[SAP S/4HANA] --> EX[SAP Connector]
+  SCH[Scheduler] --> EX
+  EX --> K[(Kafka Topics)]
+  K --> TX[Transformation Engine]
+  TX --> VAL[Validation Service]
+  VAL --> LOAD[FinSight Loader]
+  LOAD --> FS[FinSight APIs]
+  VAL --> DLQ[(Dead Letter Queue)]
+  LOAD --> REC[Reconciliation Service]
+  REC --> AUD[(Audit Store)]
+  TX --> MON[Metrics Logs Traces]
+  REC --> MON
+

@@ -1,0 +1,9 @@
+flowchart TD
+  SRC[SAP Source Extract Metrics] --> REC[Reconciliation Service]
+  TGT[FinSight Load Metrics] --> REC
+  DLQ[DLQ Metrics] --> REC
+  REC --> PASS[RECONCILED]
+  REC --> BREAK[RECON_BREAK]
+  BREAK --> REPORT[Break Report]
+  REPORT --> OWNER[Finance Data Steward or Ops]
+
