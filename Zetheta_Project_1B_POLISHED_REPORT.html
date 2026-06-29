@@ -1,0 +1,619 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project 1B - Custom API Integration Final Report</title>
+  <style>
+    @page { size: A4; margin: 15mm 13mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1d2935;
+      background: #fff;
+      font-size: 11.5px;
+      line-height: 1.48;
+    }
+    h1, h2, h3 { color: #0d3b59; line-height: 1.22; }
+    h1 { font-size: 27px; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 17px; margin: 18px 0 8px; border-bottom: 1.4px solid #cbd8e3; padding-bottom: 5px; }
+    h3 { font-size: 13px; margin: 12px 0 6px; color: #14506f; }
+    p { margin: 6px 0; }
+    .cover {
+      min-height: 255mm;
+      padding: 22mm 15mm;
+      background: linear-gradient(180deg, #f7fbfd 0%, #ffffff 55%);
+      border: 2px solid #0e6f8f;
+      border-radius: 10px;
+      page-break-after: always;
+    }
+    .kicker {
+      text-transform: uppercase;
+      color: #0e6f8f;
+      font-size: 11px;
+      letter-spacing: .08em;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .subtitle { font-size: 15px; color: #4f6171; margin-bottom: 18px; }
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+    .badge {
+      border: 1px solid #a8d5b4;
+      background: #eaf7ee;
+      color: #155c2b;
+      border-radius: 20px;
+      padding: 5px 9px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 7px 12px;
+      margin-top: 20px;
+      font-size: 12px;
+      border-top: 1px solid #d7e3ea;
+      padding-top: 14px;
+    }
+    .label { font-weight: 700; color: #2e4558; }
+    .section { page-break-inside: auto; }
+    .avoid-break { page-break-inside: avoid; }
+    .page-break { page-break-before: always; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .card {
+      border: 1px solid #d4e0e8;
+      border-radius: 7px;
+      padding: 10px;
+      background: #fbfdfe;
+      page-break-inside: avoid;
+    }
+    .metric {
+      font-size: 21px;
+      font-weight: 800;
+      color: #0e6f8f;
+      margin-bottom: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 13px;
+    }
+    th, td {
+      border: 1px solid #d4e0e8;
+      padding: 5px 6px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #edf6fa;
+      color: #0d3b59;
+      font-weight: 700;
+    }
+    tr { page-break-inside: avoid; }
+    .small-table { font-size: 9px; line-height: 1.32; }
+    .small-table th, .small-table td { padding: 4px; }
+    .mapping-table { font-size: 7.8px; line-height: 1.25; }
+    .mapping-table th, .mapping-table td { padding: 3px; }
+    .toc li { margin: 4px 0; }
+    .diagram {
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      background: #f5f8fa;
+      border: 1px solid #d4e0e8;
+      border-radius: 7px;
+      padding: 10px;
+      font-size: 10px;
+      page-break-inside: avoid;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #f7f9fb;
+      border: 1px solid #d4e0e8;
+      border-radius: 6px;
+      padding: 8px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 9px;
+      line-height: 1.34;
+    }
+    .note {
+      background: #fff8e5;
+      border-left: 4px solid #e8aa00;
+      padding: 8px 10px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+    .footer-note { color: #617383; font-size: 10px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="kicker">Final Resubmission Document</div>
+    <h1>Project 1B: Custom API Integration</h1>
+    <p class="subtitle">SAP S/4HANA ERP to FinSight Financial Analytics Platform</p>
+    <div class="badge-row">
+      <span class="badge">OpenAPI 3.0</span>
+      <span class="badge">102 Field Mappings</span>
+      <span class="badge">25 Test Scenarios</span>
+      <span class="badge">Runnable Prototype</span>
+      <span class="badge">Reconciliation Evidence</span>
+    </div>
+    <p>
+      This report presents a clean, complete, and implementation-backed solution for designing an end-to-end API integration framework between SAP S/4HANA and a financial analytics platform.
+    </p>
+    <div class="meta">
+      <div class="label">Participant</div><div>Sachin / sachin-git01</div>
+      <div class="label">GitHub Repository</div><div>https://github.com/sachin-git01/project2</div>
+      <div class="label">Source System</div><div>SAP S/4HANA ERP</div>
+      <div class="label">Target Platform</div><div>FinSight Financial Analytics Platform</div>
+      <div class="label">Primary Output</div><div>Design documentation, API specs, mapping spec, monitoring plan, test plan, and runnable proof-of-concept</div>
+      <div class="label">Validation Status</div><div>Prototype executed successfully; reconciliation status is RECONCILED</div>
+    </div>
+  </section>
+
+  <section class="section toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li>Executive Summary</li>
+      <li>Problem Statement Alignment</li>
+      <li>Business and Technical Objectives</li>
+      <li>End-to-End Architecture</li>
+      <li>API Specification</li>
+      <li>Data Mapping and Transformation</li>
+      <li>Error Handling and Resilience</li>
+      <li>Reconciliation and Audit Controls</li>
+      <li>Monitoring and Operations</li>
+      <li>Runnable Prototype and Validation Evidence</li>
+      <li>Testing Strategy</li>
+      <li>Submission Deliverables</li>
+      <li>Appendix A: Full Mapping Table</li>
+      <li>Appendix B: Full Test Scenario Table</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2>1. Executive Summary</h2>
+    <p>
+      Meridian Manufacturing uses SAP S/4HANA as its ERP system of record but needs faster and more reliable financial analytics in FinSight. This solution removes manual exports by creating a resilient integration layer that extracts SAP data, transforms it into canonical financial schemas, loads it to FinSight, and verifies every batch through reconciliation.
+    </p>
+    <p>
+      The design follows enterprise integration best practices: SAP-supported extraction methods, Kafka-based decoupling, idempotent destination APIs, DLQ isolation, circuit breakers, audit lineage, and operational dashboards.
+    </p>
+    <div class="grid-2">
+      <div class="card"><div class="metric">4 hr</div><strong>Standard freshness SLA</strong><br>Finance analytics available within 4 hours for standard domains.</div>
+      <div class="card"><div class="metric">102</div><strong>Field mappings</strong><br>Field-level source, target, transformation, validation, and error handling rules.</div>
+      <div class="card"><div class="metric">25</div><strong>Test scenarios</strong><br>Functional, non-functional, failure, security, and reconciliation tests.</div>
+      <div class="card"><div class="metric">0</div><strong>Duplicate tolerance</strong><br>Idempotency keys prevent duplicate FinSight writes.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. Problem Statement Alignment</h2>
+    <table>
+      <thead><tr><th>Project Requirement</th><th>Solution Coverage</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>Custom API integration framework</td><td>Source API facade, Kafka integration layer, transformation engine, validation service, FinSight loader, reconciliation, and monitoring.</td><td>Architecture + APIs + prototype</td></tr>
+        <tr><td>SAP S/4HANA source system</td><td>Uses ACDOCA, BKPF, ODP, CDS, OData, RFC, IDoc, and SAP master data concepts.</td><td>Source endpoint table and mappings</td></tr>
+        <tr><td>Financial analytics platform</td><td>Defines FinSight batch ingestion endpoints and canonical financial payloads.</td><td>Destination API table</td></tr>
+        <tr><td>API specification</td><td>OpenAPI 3.0 YAML files for SAP and FinSight.</td><td>api/API_SAP_Source.yaml and api/API_FinSight_Destination.yaml</td></tr>
+        <tr><td>Data extraction</td><td>ODP/CDS delta strategy plus runnable CSV extraction simulation.</td><td>Prototype and extraction design</td></tr>
+        <tr><td>Transformation logic</td><td>102 documented mappings plus executable Python transformation logic.</td><td>Appendix A and transform.py</td></tr>
+        <tr><td>Communication protocols</td><td>HTTPS/OData, RFC/SNC, Kafka, OAuth 2.0, TLS 1.2+, and API gateway controls.</td><td>Architecture and security sections</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>3. Business and Technical Objectives</h2>
+    <table>
+      <thead><tr><th>Objective</th><th>Implementation</th><th>Success Measure</th></tr></thead>
+      <tbody>
+        <tr><td>Improve finance visibility</td><td>Automated SAP-to-FinSight data flow</td><td>Dashboards refreshed within SLA</td></tr>
+        <tr><td>Reduce manual reconciliation</td><td>Batch reconciliation service</td><td>Counts, totals, and checksums match</td></tr>
+        <tr><td>Protect SAP stability</td><td>Delta extraction, package limits, off-peak full loads</td><td>No production performance degradation</td></tr>
+        <tr><td>Ensure auditability</td><td>Lineage fields from SAP document to FinSight record</td><td>Every target record traceable</td></tr>
+        <tr><td>Handle failures safely</td><td>Retries, circuit breakers, DLQ, business exception queues</td><td>No data loss during transient failures</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>4. End-to-End Architecture</h2>
+    <div class="diagram">SAP S/4HANA
+  | ODP / CDS / OData / RFC / IDoc
+  v
+SAP Connector + Scheduler
+  | publishes domain events
+  v
+Kafka Topics and Schema Registry
+  | consumed by domain workers
+  v
+Transformation Engine -> Validation Service -> FinSight Loader -> FinSight APIs
+          |                     |                    |
+          v                     v                    v
+    Audit Store               DLQ             Reconciliation Service
+          \____________________|____________________/
+                         Monitoring Stack</div>
+    <h3>Architecture Components</h3>
+    <table>
+      <thead><tr><th>Component</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>Scheduler</td><td>Triggers full loads, deltas, retries, and reconciliation jobs.</td></tr>
+        <tr><td>SAP Connector</td><td>Reads SAP source data through supported enterprise interfaces.</td></tr>
+        <tr><td>Kafka</td><td>Buffers messages, supports replay, and isolates SAP from FinSight outages.</td></tr>
+        <tr><td>Transformation Engine</td><td>Converts SAP records to canonical FinSight schemas.</td></tr>
+        <tr><td>Validation Service</td><td>Checks mandatory fields, dates, currency, and master data references.</td></tr>
+        <tr><td>FinSight Loader</td><td>Loads records using batch upsert APIs and idempotency keys.</td></tr>
+        <tr><td>Reconciliation Service</td><td>Compares source and target counts, amounts, checksums, and lineage.</td></tr>
+        <tr><td>Monitoring Stack</td><td>Tracks freshness, throughput, errors, DLQ, lag, and circuit breakers.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>5. API Specification</h2>
+    <h3>SAP Source APIs</h3>
+    <table class='small-table'><thead><tr><th>ID</th><th>Domain</th><th>Endpoint</th><th>Extraction</th><th>SAP Source</th></tr></thead><tbody><tr><td>SRC-001</td><td>General Ledger</td><td>/sap/v1/general-ledger/journal-entries</td><td>ODP delta</td><td>ACDOCA/BKPF</td></tr>
+<tr><td>SRC-002</td><td>Accounts Payable</td><td>/sap/v1/accounts-payable/open-items</td><td>ODP delta</td><td>ACDOCA/LFA1</td></tr>
+<tr><td>SRC-003</td><td>Accounts Receivable</td><td>/sap/v1/accounts-receivable/open-items</td><td>ODP delta</td><td>ACDOCA/KNA1</td></tr>
+<tr><td>SRC-004</td><td>Cost Centre</td><td>/sap/v1/master-data/cost-centres</td><td>CDS/OData</td><td>CSKS/CSKT</td></tr>
+<tr><td>SRC-005</td><td>Profit Centre</td><td>/sap/v1/master-data/profit-centres</td><td>CDS/OData</td><td>CEPC/CEPCT</td></tr>
+<tr><td>SRC-006</td><td>Material Ledger</td><td>/sap/v1/material-ledger/movements</td><td>CDS delta</td><td>MLDOC/CKMLCR</td></tr>
+<tr><td>SRC-007</td><td>Purchase Orders</td><td>/sap/v1/procurement/purchase-orders</td><td>OData/CDS</td><td>EKKO/EKPO/EKBE</td></tr>
+<tr><td>SRC-008</td><td>Sales Orders</td><td>/sap/v1/sales/sales-orders</td><td>OData/CDS</td><td>VBAK/VBAP/VBFA</td></tr>
+<tr><td>SRC-009</td><td>Fixed Assets</td><td>/sap/v1/fixed-assets/assets</td><td>CDS</td><td>ANLA/ANLC</td></tr>
+<tr><td>SRC-010</td><td>Bank Statements</td><td>/sap/v1/cash/bank-statements</td><td>IDoc/CDS</td><td>FEBKO/FEBEP</td></tr>
+<tr><td>SRC-011</td><td>Budget vs Actual</td><td>/sap/v1/controlling/budget-actuals</td><td>CDS</td><td>ACDOCA/ACDOCP</td></tr>
+<tr><td>SRC-012</td><td>Inventory</td><td>/sap/v1/inventory/stock-movements</td><td>ODP/CDS</td><td>MATDOC/MARA</td></tr></tbody></table>
+    <h3>FinSight Destination APIs</h3>
+    <table class='small-table'><thead><tr><th>ID</th><th>Domain</th><th>Endpoint</th></tr></thead><tbody><tr><td>DST-001</td><td>General Ledger</td><td>/finsight/v1/journal-entries:batchUpsert</td></tr>
+<tr><td>DST-002</td><td>Accounts Payable</td><td>/finsight/v1/payables:batchUpsert</td></tr>
+<tr><td>DST-003</td><td>Accounts Receivable</td><td>/finsight/v1/receivables:batchUpsert</td></tr>
+<tr><td>DST-004</td><td>Cost Centre</td><td>/finsight/v1/cost-centres:batchUpsert</td></tr>
+<tr><td>DST-005</td><td>Profit Centre</td><td>/finsight/v1/profit-centres:batchUpsert</td></tr>
+<tr><td>DST-006</td><td>Material Ledger</td><td>/finsight/v1/material-movements:batchUpsert</td></tr>
+<tr><td>DST-007</td><td>Purchase Orders</td><td>/finsight/v1/purchase-orders:batchUpsert</td></tr>
+<tr><td>DST-008</td><td>Sales Orders</td><td>/finsight/v1/sales-orders:batchUpsert</td></tr>
+<tr><td>DST-009</td><td>Fixed Assets</td><td>/finsight/v1/fixed-assets:batchUpsert</td></tr>
+<tr><td>DST-010</td><td>Bank Statements</td><td>/finsight/v1/bank-statements:batchUpsert</td></tr>
+<tr><td>DST-011</td><td>Budget vs Actual</td><td>/finsight/v1/budget-actuals:batchUpsert</td></tr>
+<tr><td>DST-012</td><td>Inventory</td><td>/finsight/v1/inventory:batchUpsert</td></tr></tbody></table>
+    <div class="note">
+      API design includes OAuth 2.0 authentication, cursor pagination, delta tokens, rate-limit headers, Retry-After handling, common error envelope, and mandatory Idempotency-Key for writes.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. Data Mapping and Transformation</h2>
+    <p>
+      The project includes 102 field-level mappings across 12 domains. Each mapping includes source field, target field, transformation rule, validation, and error handling.
+    </p>
+    <table class='small-table'><thead><tr><th>Domain</th><th>Mapping Count</th><th>Coverage</th></tr></thead><tbody><tr><td>AP</td></tr>
+<tr><td>10</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>AR</td></tr>
+<tr><td>10</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Bank Statement</td></tr>
+<tr><td>7</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>BudgetActual</td></tr>
+<tr><td>8</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Cost Centre</td></tr>
+<tr><td>6</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Fixed Assets</td></tr>
+<tr><td>6</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>GL</td></tr>
+<tr><td>15</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Inventory</td></tr>
+<tr><td>10</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Material Ledger</td></tr>
+<tr><td>8</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Profit Centre</td></tr>
+<tr><td>6</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Purchase Order</td></tr>
+<tr><td>8</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr>
+<tr><td>Sales Order</td></tr>
+<tr><td>8</td></tr>
+<tr><td>Source field, target field, transformation, validation, and error handling documented</td></tr></tbody></table>
+    <h3>Core Transformation Rules</h3>
+    <table>
+      <thead><tr><th>Rule</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr><td>Date conversion</td><td>SAP YYYYMMDD values are converted to ISO YYYY-MM-DD.</td></tr>
+        <tr><td>Currency conversion</td><td>Transaction currency is validated against ISO 4217 and converted to INR using point-in-time rates.</td></tr>
+        <tr><td>Fiscal period handling</td><td>Periods 013-016 are mapped as special periods while preserving audit flags.</td></tr>
+        <tr><td>Idempotency</td><td>Keys are generated from tenant, domain, company code, fiscal year, document number, and line item.</td></tr>
+        <tr><td>Lineage</td><td>Every target record carries source system, source table, source document, and batch ID.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>7. Error Handling and Resilience</h2>
+    <table class='small-table'><thead><tr><th>Code</th><th>Scenario</th><th>Default Action</th></tr></thead><tbody><tr><td>ERR-EXT-001</td><td>SAP RFC timeout</td><td>Retry with exponential backoff</td></tr>
+<tr><td>ERR-EXT-003</td><td>ODP subscription invalidated</td><td>Halt domain and alert integration team</td></tr>
+<tr><td>ERR-MAP-001</td><td>Mandatory field missing</td><td>Default if allowed else DLQ</td></tr>
+<tr><td>ERR-MAP-002</td><td>Invalid date format</td><td>Correct if possible else DLQ</td></tr>
+<tr><td>ERR-MAP-003</td><td>Missing master data reference</td><td>Business exception queue</td></tr>
+<tr><td>ERR-MAP-004</td><td>Invalid currency</td><td>Typo correction else DLQ</td></tr>
+<tr><td>ERR-LOAD-001</td><td>FinSight HTTP 429</td><td>Honor Retry-After and throttle</td></tr>
+<tr><td>ERR-LOAD-004</td><td>Duplicate entry</td><td>Compare payload hash and skip identical</td></tr>
+<tr><td>ERR-RECON-001</td><td>Record count mismatch</td><td>Generate break report</td></tr>
+<tr><td>ERR-SYS-001</td><td>Kafka broker unreachable</td><td>Circuit breaker and P1 alert</td></tr></tbody></table>
+    <h3>Resilience Patterns</h3>
+    <table>
+      <thead><tr><th>Pattern</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>Exponential backoff with jitter</td><td>Retries transient SAP and FinSight failures without overwhelming recovering services.</td></tr>
+        <tr><td>Circuit breaker</td><td>Stops repeated calls to unhealthy SAP, FinSight, or Kafka dependencies.</td></tr>
+        <tr><td>Dead letter queue</td><td>Stores records that fail validation or mapping after controlled handling.</td></tr>
+        <tr><td>Idempotent receiver</td><td>Prevents duplicate target writes during retry or replay.</td></tr>
+        <tr><td>Bulkhead isolation</td><td>Prevents one failed domain from blocking other domains.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>8. Reconciliation and Audit Controls</h2>
+    <table>
+      <thead><tr><th>Control</th><th>Purpose</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>Record count</td><td>Source count equals accepted plus rejected records.</td><td>No unexplained missing records.</td></tr>
+        <tr><td>Debit-credit total</td><td>Validates financial balance after transformation.</td><td>Debit total equals credit total for balanced batches.</td></tr>
+        <tr><td>Checksum</td><td>Detects accidental changes in business keys or amounts.</td><td>Stable hash per batch.</td></tr>
+        <tr><td>Lineage</td><td>Connects FinSight record back to SAP source document.</td><td>Audit-ready traceability.</td></tr>
+      </tbody>
+    </table>
+    <h3>Generated Reconciliation Evidence</h3>
+    <pre>{
+  &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+  &quot;domain&quot;: &quot;GENERAL_LEDGER&quot;,
+  &quot;sourceRecordCount&quot;: 8,
+  &quot;acceptedRecordCount&quot;: 6,
+  &quot;rejectedRecordCount&quot;: 2,
+  &quot;debitTotalInr&quot;: 253125.0,
+  &quot;creditTotalInr&quot;: 253125.0,
+  &quot;netAmountInr&quot;: 0.0,
+  &quot;checksum&quot;: &quot;8676c1adfc4a3254d74b7435e4948929717a01668e919b648920480fca4665ef&quot;,
+  &quot;status&quot;: &quot;RECONCILED&quot;
+}</pre>
+  </section>
+
+  <section class="section">
+    <h2>9. Monitoring and Operations</h2>
+    <table class='small-table'><thead><tr><th>Panel</th><th>Title</th><th>Metric Focus</th><th>Alert</th></tr></thead><tbody><tr><td>MON-001</td><td>Pipeline Health</td><td>Domain freshness, failures, last successful load</td><td>P1 when RED</td></tr>
+<tr><td>MON-002</td><td>Throughput</td><td>records/sec by domain</td><td>Warn below 50% baseline</td></tr>
+<tr><td>MON-003</td><td>Latency</td><td>P95/P99 API latency</td><td>Warn above 5 seconds</td></tr>
+<tr><td>MON-004</td><td>Error Rate</td><td>errors / requests</td><td>Critical above 5%</td></tr>
+<tr><td>MON-005</td><td>DLQ Depth</td><td>failed record backlog</td><td>P1 above 500</td></tr>
+<tr><td>MON-006</td><td>Reconciliation</td><td>PASS/WARN/BREAK per batch</td><td>P2 on break</td></tr>
+<tr><td>MON-007</td><td>SAP Health</td><td>RFC pool, response time, work processes</td><td>Critical above 90% pool</td></tr>
+<tr><td>MON-008</td><td>FinSight API</td><td>rate limit, response time, token expiry</td><td>Warn below 10% quota</td></tr>
+<tr><td>MON-009</td><td>Data Freshness</td><td>now - last load</td><td>Alert on SLA breach</td></tr>
+<tr><td>MON-010</td><td>Resources</td><td>CPU, memory, disk, network</td><td>P2 above 90%</td></tr>
+<tr><td>MON-011</td><td>Kafka Lag</td><td>consumer group lag</td><td>P2 above 50K</td></tr>
+<tr><td>MON-012</td><td>Circuit Breakers</td><td>open/half-open/closed</td><td>P2 if open</td></tr></tbody></table>
+  </section>
+
+  <section class="section">
+    <h2>10. Runnable Prototype and Validation Evidence</h2>
+    <p>
+      A runnable Python prototype is included to prove the integration behavior. It reads SAP-style GL data, validates records, transforms valid rows into FinSight JSON, routes invalid records to DLQ, and generates a reconciliation report.
+    </p>
+    <h3>Run Commands</h3>
+    <pre>$env:PYTHONPATH='src'
+python -m sap_finsight_integration.cli
+python -m unittest discover -s tests -p '*unittest.py'</pre>
+    <h3>Observed Result</h3>
+    <table>
+      <thead><tr><th>Item</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Batch ID</td><td>BATCH-GL-20260629-0930</td></tr>
+        <tr><td>Status</td><td>RECONCILED</td></tr>
+        <tr><td>Accepted records</td><td>6</td></tr>
+        <tr><td>DLQ records</td><td>2</td></tr>
+        <tr><td>Automated tests</td><td>2 tests passed using Python unittest</td></tr>
+      </tbody>
+    </table>
+    <h3>Sample SAP Input</h3>
+    <pre>company_code,fiscal_year,fiscal_period,document_number,line_item,gl_account,cost_centre,profit_centre,posting_date,currency,amount,debit_credit
+1000,2026,003,5100001001,1,400000,CC100,PC100,20260628,INR,125000.00,S
+1000,2026,003,5100001001,2,110000,CC100,PC100,20260628,INR,125000.00,H
+1000,2026,003,5100001002,1,500000,CC200,PC200,20260628,USD,1000.00,S
+1000,2026,003,5100001002,2,210000,CC200,PC200,20260628,USD,1000.00,H</pre>
+    <h3>Load Result</h3>
+    <pre>{
+  &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+  &quot;status&quot;: &quot;COMPLETED&quot;,
+  &quot;acceptedCount&quot;: 6,
+  &quot;rejectedCount&quot;: 0
+}</pre>
+  </section>
+
+  <section class="section">
+    <h2>11. Testing Strategy</h2>
+    <p>
+      The test plan covers functional correctness, performance, concurrency, failure recovery, security, and reconciliation controls. The complete test table is included in Appendix B.
+    </p>
+    <table>
+      <thead><tr><th>Category</th><th>Coverage</th></tr></thead>
+      <tbody>
+        <tr><td>Functional</td><td>GL, AP, AR, master data, hierarchy, P2P, bank statements, budget, and full reconciliation.</td></tr>
+        <tr><td>Non-functional</td><td>Peak load, concurrency, latency, scalability, and endurance.</td></tr>
+        <tr><td>Failure</td><td>SAP RFC failure, FinSight 429, Kafka failure, malformed records, and network partition.</td></tr>
+        <tr><td>Security</td><td>OAuth expiry, invalid token, TLS, and encryption.</td></tr>
+        <tr><td>Reconciliation</td><td>Deliberate amount variance and missing master data.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>12. Submission Deliverables</h2>
+    <table>
+      <thead><tr><th>Deliverable</th><th>Artifact</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Project overview</td><td>README.md</td><td>Complete</td></tr>
+        <tr><td>Requirements</td><td>docs/D0_Requirements_v1.md</td><td>Complete</td></tr>
+        <tr><td>Architecture</td><td>docs/D1_Integration_Architecture_v1.md and diagrams/*.mmd</td><td>Complete</td></tr>
+        <tr><td>API specs</td><td>api/API_SAP_Source.yaml and api/API_FinSight_Destination.yaml</td><td>Complete</td></tr>
+        <tr><td>Mappings</td><td>mappings/MAP_Finance_AllDomains_v1.md</td><td>Complete, 102 mappings</td></tr>
+        <tr><td>Error handling</td><td>docs/D4_Error_Handling_Framework_v1.md</td><td>Complete</td></tr>
+        <tr><td>Reconciliation</td><td>docs/D5_Reconciliation_Specification_v1.md</td><td>Complete</td></tr>
+        <tr><td>Monitoring</td><td>monitoring/D6_Monitoring_Dashboard_v1.md</td><td>Complete</td></tr>
+        <tr><td>Test plan</td><td>tests/D7_Integration_Test_Plan_v1.md</td><td>Complete, 25 scenarios</td></tr>
+        <tr><td>Runnable prototype</td><td>src/, data/sample/, outputs/, tests/</td><td>Complete and verified</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section page-break">
+    <h2>Appendix A: Full Mapping Table</h2>
+    <p class="footer-note">Full 102-field mapping evidence. Font is compact only for appendix density; main explanation appears in Section 6.</p>
+    <table class='mapping-table'><thead><tr><th>ID</th><th>Domain</th><th>Source Field</th><th>Target Field</th><th>Transformation</th><th>Validation</th><th>Error Handling</th></tr></thead><tbody><tr><td>MAP-GL-001</td><td>GL</td><td>ACDOCA-RBUKRS</td><td>companyCode</td><td>Trim and preserve 4-char code</td><td>Required, known company</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-002</td><td>GL</td><td>ACDOCA-GJAHR</td><td>fiscalYear</td><td>String YYYY</td><td>Required, 4 digits</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-003</td><td>GL</td><td>ACDOCA-BELNR</td><td>sourceDocument</td><td>Preserve SAP document number</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-004</td><td>GL</td><td>ACDOCA-DOCLN</td><td>lineItem</td><td>Left-pad to 3 digits</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-005</td><td>GL</td><td>ACDOCA-RACCT</td><td>glAccount</td><td>Strip leading spaces</td><td>Required, chart lookup</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-GL-006</td><td>GL</td><td>ACDOCA-RCNTR</td><td>costCentre</td><td>Null if blank</td><td>Must exist when populated</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-GL-007</td><td>GL</td><td>ACDOCA-PRCTR</td><td>profitCentre</td><td>Null if blank</td><td>Must exist when populated</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-GL-008</td><td>GL</td><td>BKPF-BUDAT</td><td>postingDate</td><td>Convert YYYYMMDD to ISO date</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-GL-009</td><td>GL</td><td>BKPF-BLDAT</td><td>documentDate</td><td>Convert YYYYMMDD to ISO date</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-GL-010</td><td>GL</td><td>ACDOCA-HSL</td><td>amountInFunctionalCurrency</td><td>Decimal(18,2)</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-GL-011</td><td>GL</td><td>ACDOCA-WSL</td><td>amountInTransactionCurrency</td><td>Decimal(18,2)</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-GL-012</td><td>GL</td><td>ACDOCA-RWCUR</td><td>transactionCurrency</td><td>ISO currency</td><td>ISO 4217</td><td>ERR-MAP-004</td></tr>
+<tr><td>MAP-GL-013</td><td>GL</td><td>ACDOCA-DRCRK</td><td>debitCredit</td><td>S=DEBIT, H=CREDIT</td><td>Enum</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-014</td><td>GL</td><td>ACDOCA-POPER</td><td>fiscalPeriod</td><td>Map 001-012, 013-016 as special</td><td>001-016</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-GL-015</td><td>GL</td><td>Composite</td><td>sourceBusinessKey</td><td>company:document:year:item</td><td>Unique</td><td>ERR-LOAD-004</td></tr>
+<tr><td>MAP-AP-001</td><td>AP</td><td>ACDOCA-LIFNR</td><td>vendorId</td><td>Strip leading zeroes for display, retain raw</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-AP-002</td><td>AP</td><td>LFA1-NAME1</td><td>vendorName</td><td>Trim</td><td>Required for enrichment</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-AP-003</td><td>AP</td><td>LFA1-STCD3</td><td>vendorGstin</td><td>Uppercase</td><td>GSTIN pattern when India vendor</td><td>ERR-MAP-004</td></tr>
+<tr><td>MAP-AP-004</td><td>AP</td><td>ACDOCA-BELNR</td><td>invoiceDocument</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-AP-005</td><td>AP</td><td>ACDOCA-AUGBL</td><td>clearingDocument</td><td>Null if open</td><td>Optional</td><td>DLQ only if invalid format</td></tr>
+<tr><td>MAP-AP-006</td><td>AP</td><td>ACDOCA-ZFBDT</td><td>baselineDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-AP-007</td><td>AP</td><td>ACDOCA-ZBD1T</td><td>paymentTermsDays</td><td>Integer</td><td>&gt;=0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AP-008</td><td>AP</td><td>Derived</td><td>ageingBucket</td><td>days past due: 0-30/31-60/61-90/90+</td><td>Required</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AP-009</td><td>AP</td><td>ACDOCA-TSL</td><td>openAmount</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AP-010</td><td>AP</td><td>ACDOCA-RWCUR</td><td>currency</td><td>ISO currency</td><td>ISO 4217</td><td>ERR-MAP-004</td></tr>
+<tr><td>MAP-AR-001</td><td>AR</td><td>ACDOCA-KUNNR</td><td>customerId</td><td>Strip leading zeroes for display</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-AR-002</td><td>AR</td><td>KNA1-NAME1</td><td>customerName</td><td>Trim</td><td>Required for enrichment</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-AR-003</td><td>AR</td><td>KNA1-STCD3</td><td>customerGstin</td><td>Uppercase</td><td>GSTIN pattern when India customer</td><td>ERR-MAP-004</td></tr>
+<tr><td>MAP-AR-004</td><td>AR</td><td>ACDOCA-BELNR</td><td>invoiceDocument</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-AR-005</td><td>AR</td><td>ACDOCA-ZFBDT</td><td>baselineDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-AR-006</td><td>AR</td><td>KNKK-KLIMK</td><td>creditLimit</td><td>Decimal</td><td>&gt;=0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AR-007</td><td>AR</td><td>KNKK-SAUFT</td><td>creditExposure</td><td>Decimal</td><td>&gt;=0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AR-008</td><td>AR</td><td>ACDOCA-MANST</td><td>dunningLevel</td><td>Map SAP level to LOW/MEDIUM/HIGH</td><td>Known code</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-AR-009</td><td>AR</td><td>Derived</td><td>ageingBucket</td><td>days past due</td><td>Required</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-AR-010</td><td>AR</td><td>ACDOCA-TSL</td><td>openAmount</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-CC-001</td><td>Cost Centre</td><td>CSKS-KOKRS</td><td>controllingArea</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-CC-002</td><td>Cost Centre</td><td>CSKS-KOSTL</td><td>costCentre</td><td>Preserve</td><td>Required, unique</td><td>ERR-LOAD-004</td></tr>
+<tr><td>MAP-CC-003</td><td>Cost Centre</td><td>CSKT-KTEXT</td><td>costCentreName</td><td>Trim</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-CC-004</td><td>Cost Centre</td><td>CSKS-DATAB</td><td>validFrom</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-CC-005</td><td>Cost Centre</td><td>CSKS-DATBI</td><td>validTo</td><td>YYYYMMDD to ISO</td><td>&gt;= validFrom</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-CC-006</td><td>Cost Centre</td><td>SETNODE</td><td>hierarchyPath</td><td>Flatten to Level1-Level7</td><td>All parents exist</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-PC-001</td><td>Profit Centre</td><td>CEPC-KOKRS</td><td>controllingArea</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PC-002</td><td>Profit Centre</td><td>CEPC-PRCTR</td><td>profitCentre</td><td>Preserve</td><td>Required, unique</td><td>ERR-LOAD-004</td></tr>
+<tr><td>MAP-PC-003</td><td>Profit Centre</td><td>CEPCT-KTEXT</td><td>profitCentreName</td><td>Trim</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PC-004</td><td>Profit Centre</td><td>CEPC-SEGMENT</td><td>segment</td><td>Map to reporting segment</td><td>Known segment</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-PC-005</td><td>Profit Centre</td><td>CEPC-DATAB</td><td>validFrom</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-PC-006</td><td>Profit Centre</td><td>CEPC-DATBI</td><td>validTo</td><td>YYYYMMDD to ISO</td><td>&gt;= validFrom</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-ML-001</td><td>Material Ledger</td><td>MLDOC-MATNR</td><td>materialId</td><td>Preserve raw and display</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-ML-002</td><td>Material Ledger</td><td>MARA-MAKTX</td><td>materialDescription</td><td>Trim</td><td>Optional</td><td>Business exception</td></tr>
+<tr><td>MAP-ML-003</td><td>Material Ledger</td><td>MLDOC-WERKS</td><td>plant</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-ML-004</td><td>Material Ledger</td><td>MLDOC-BWART</td><td>movementType</td><td>Map to movement category</td><td>Known code</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-ML-005</td><td>Material Ledger</td><td>MLDOC-MENGE</td><td>quantity</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-ML-006</td><td>Material Ledger</td><td>MLDOC-MEINS</td><td>unitOfMeasure</td><td>ISO/UoM map</td><td>Known UoM</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-ML-007</td><td>Material Ledger</td><td>CKMLCR-PVPRS</td><td>periodicUnitPrice</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-ML-008</td><td>Material Ledger</td><td>MLDOC-BUDAT</td><td>postingDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-PO-001</td><td>Purchase Order</td><td>EKKO-EBELN</td><td>purchaseOrder</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PO-002</td><td>Purchase Order</td><td>EKPO-EBELP</td><td>poLineItem</td><td>Left-pad</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PO-003</td><td>Purchase Order</td><td>EKKO-LIFNR</td><td>vendorId</td><td>Normalize</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PO-004</td><td>Purchase Order</td><td>EKKO-BEDAT</td><td>poDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-PO-005</td><td>Purchase Order</td><td>EKPO-MATNR</td><td>materialId</td><td>Preserve</td><td>Required for material PO</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-PO-006</td><td>Purchase Order</td><td>EKPO-MENGE</td><td>orderedQuantity</td><td>Decimal</td><td>&gt;0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-PO-007</td><td>Purchase Order</td><td>EKPO-NETPR</td><td>netPrice</td><td>Decimal</td><td>&gt;=0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-PO-008</td><td>Purchase Order</td><td>EKBE-BEWTP</td><td>poHistoryCategory</td><td>Map GR/IR/payment</td><td>Known code</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-SO-001</td><td>Sales Order</td><td>VBAK-VBELN</td><td>salesOrder</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-SO-002</td><td>Sales Order</td><td>VBAP-POSNR</td><td>salesLineItem</td><td>Left-pad</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-SO-003</td><td>Sales Order</td><td>VBAK-KUNNR</td><td>customerId</td><td>Normalize</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-SO-004</td><td>Sales Order</td><td>VBAK-AUDAT</td><td>orderDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-SO-005</td><td>Sales Order</td><td>VBAP-MATNR</td><td>materialId</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-SO-006</td><td>Sales Order</td><td>VBAP-KWMENG</td><td>orderedQuantity</td><td>Decimal</td><td>&gt;0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-SO-007</td><td>Sales Order</td><td>VBAP-NETWR</td><td>netValue</td><td>Decimal</td><td>&gt;=0</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-SO-008</td><td>Sales Order</td><td>VBFA-VBTYP_N</td><td>documentFlowStatus</td><td>Map delivery/invoice/payment</td><td>Known code</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-FA-001</td><td>Fixed Assets</td><td>ANLA-ANLN1</td><td>assetNumber</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-FA-002</td><td>Fixed Assets</td><td>ANLA-ANLN2</td><td>assetSubnumber</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-FA-003</td><td>Fixed Assets</td><td>ANLA-TXT50</td><td>assetDescription</td><td>Trim</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-FA-004</td><td>Fixed Assets</td><td>ANLA-AKTIV</td><td>capitalizationDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-FA-005</td><td>Fixed Assets</td><td>ANLC-KANSW</td><td>acquisitionValue</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-FA-006</td><td>Fixed Assets</td><td>ANLC-NAFAG</td><td>accumulatedDepreciation</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-BS-001</td><td>Bank Statement</td><td>FEBKO-KUKEY</td><td>statementKey</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-BS-002</td><td>Bank Statement</td><td>FEBKO-AZNUM</td><td>statementNumber</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-BS-003</td><td>Bank Statement</td><td>FEBEP-ESNUM</td><td>statementLine</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-BS-004</td><td>Bank Statement</td><td>FEBEP-WRBTR</td><td>amount</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-BS-005</td><td>Bank Statement</td><td>FEBEP-VALUT</td><td>valueDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr>
+<tr><td>MAP-BS-006</td><td>Bank Statement</td><td>FEBEP-XBLNR</td><td>bankReference</td><td>Trim</td><td>Optional</td><td>None</td></tr>
+<tr><td>MAP-BS-007</td><td>Bank Statement</td><td>FEBEP-AUGBL</td><td>clearingDocument</td><td>Null if unmatched</td><td>Optional</td><td>Business exception</td></tr>
+<tr><td>MAP-BA-001</td><td>BudgetActual</td><td>ACDOCP-RBUKRS</td><td>companyCode</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-BA-002</td><td>BudgetActual</td><td>ACDOCP-RCNTR</td><td>costCentre</td><td>Preserve</td><td>Must exist</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-BA-003</td><td>BudgetActual</td><td>ACDOCP-RACCT</td><td>glAccount</td><td>Preserve</td><td>Must exist</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-BA-004</td><td>BudgetActual</td><td>ACDOCP-POPER</td><td>fiscalPeriod</td><td>Preserve</td><td>001-016</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-BA-005</td><td>BudgetActual</td><td>ACDOCP-HSL</td><td>budgetAmount</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-BA-006</td><td>BudgetActual</td><td>ACDOCA-HSL</td><td>actualAmount</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-BA-007</td><td>BudgetActual</td><td>Derived</td><td>varianceAmount</td><td>actual - budget</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-BA-008</td><td>BudgetActual</td><td>Derived</td><td>variancePercent</td><td>variance / budget</td><td>Handle zero budget</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-INV-001</td><td>Inventory</td><td>MATDOC-MBLNR</td><td>materialDocument</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-INV-002</td><td>Inventory</td><td>MATDOC-ZEILE</td><td>materialDocLine</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-INV-003</td><td>Inventory</td><td>MATDOC-MATNR</td><td>materialId</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-INV-004</td><td>Inventory</td><td>MATDOC-WERKS</td><td>plant</td><td>Preserve</td><td>Required</td><td>ERR-MAP-001</td></tr>
+<tr><td>MAP-INV-005</td><td>Inventory</td><td>MATDOC-LGORT</td><td>storageLocation</td><td>Preserve</td><td>Optional</td><td>None</td></tr>
+<tr><td>MAP-INV-006</td><td>Inventory</td><td>MATDOC-BWART</td><td>movementType</td><td>Map receipt/issue/transfer</td><td>Known code</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-INV-007</td><td>Inventory</td><td>MATDOC-MENGE</td><td>movementQuantity</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-INV-008</td><td>Inventory</td><td>MATDOC-MEINS</td><td>unitOfMeasure</td><td>UoM lookup</td><td>Known UoM</td><td>ERR-MAP-003</td></tr>
+<tr><td>MAP-INV-009</td><td>Inventory</td><td>MATDOC-DMBTR</td><td>movementValue</td><td>Decimal</td><td>Numeric</td><td>ERR-MAP-006</td></tr>
+<tr><td>MAP-INV-010</td><td>Inventory</td><td>MATDOC-BUDAT</td><td>postingDate</td><td>YYYYMMDD to ISO</td><td>Valid date</td><td>ERR-MAP-002</td></tr></tbody></table>
+  </section>
+
+  <section class="section page-break">
+    <h2>Appendix B: Full Test Scenario Table</h2>
+    <table class='small-table'><thead><tr><th>ID</th><th>Category/Title</th><th>Preconditions/Title</th><th>Steps/Validation</th><th>Expected Result</th></tr></thead><tbody><tr><td>TST-FNC-001</td><td>Happy Path GL Extraction</td><td>100 GL entries in SAP sandbox</td><td>Trigger delta, verify Kafka count, load FinSight, reconcile</td><td>100 records loaded, checksum match</td></tr>
+<tr><td>TST-FNC-002</td><td>AP Open Items Multi-Currency</td><td>INR, USD, EUR AP items and TCURR rates</td><td>Extract AP, convert currency, check ageing</td><td>Correct INR conversion and ageing</td></tr>
+<tr><td>TST-FNC-003</td><td>Master Data Delta Sync</td><td>Existing cost centre sync</td><td>Create cost centre, run cycle, query target</td><td>New cost centre appears</td></tr>
+<tr><td>TST-FNC-004</td><td>Multi-Company Code Batch</td><td>Entries for MC01, MC02, MC03</td><td>Extract mixed batch, verify routing</td><td>Each company routes to correct tenant</td></tr>
+<tr><td>TST-FNC-005</td><td>Fiscal Period Mapping</td><td>SAP periods 001-016</td><td>Extract all periods, verify mapping</td><td>013-016 flagged as special periods</td></tr>
+<tr><td>TST-FNC-006</td><td>7-Level Hierarchy Flatten</td><td>Cost centre hierarchy exists</td><td>Extract hierarchy and inspect target</td><td>Level1-Level7 populated</td></tr>
+<tr><td>TST-FNC-007</td><td>P2P Flow Tracing</td><td>PO, GR, invoice, payment exist</td><td>Extract stages and trace flow</td><td>All stages linked</td></tr>
+<tr><td>TST-FNC-008</td><td>Bank Statement Load</td><td>50 bank items</td><td>Load IDoc/CDS, transform, validate clearing</td><td>Matched cleared, unmatched open</td></tr>
+<tr><td>TST-FNC-009</td><td>Budget vs Actual Variance</td><td>Budget and actuals for 5 centres</td><td>Extract both and calculate variance</td><td>Matches SAP CO report</td></tr>
+<tr><td>TST-FNC-010</td><td>End-of-Day Full Reconciliation</td><td>Full day across domains</td><td>Run all extractions and recon</td><td>Zero unexplained breaks</td></tr>
+<tr><td>TST-NFR-001</td><td>Performance</td><td>Peak 500K GL entries</td><td>Completes within 2-hour SLA</td></tr>
+<tr><td>TST-NFR-002</td><td>Concurrency</td><td>12 domains run together</td><td>No deadlocks or resource contention</td></tr>
+<tr><td>TST-NFR-003</td><td>Latency</td><td>500 concurrent FinSight requests</td><td>P95 under 5 seconds, controlled 429</td></tr>
+<tr><td>TST-NFR-004</td><td>Scalability</td><td>1K to 100K records</td><td>Linear throughput until documented ceiling</td></tr>
+<tr><td>TST-NFR-005</td><td>Endurance</td><td>24-hour operation</td><td>No memory leak or connection exhaustion</td></tr>
+<tr><td>TST-FLR-001</td><td>Failure</td><td>SAP RFC failure mid-batch</td><td>Circuit opens, partial batch preserved</td></tr>
+<tr><td>TST-FLR-002</td><td>Failure</td><td>FinSight HTTP 429</td><td>Honors Retry-After and succeeds eventually</td></tr>
+<tr><td>TST-FLR-003</td><td>Failure</td><td>Kafka broker failure</td><td>Failover with zero message loss</td></tr>
+<tr><td>TST-FLR-004</td><td>Failure</td><td>10 malformed records in 100</td><td>90 succeed, 10 DLQ</td></tr>
+<tr><td>TST-FLR-005</td><td>Failure</td><td>5-minute network partition</td><td>Buffers and recovers with eventual consistency</td></tr>
+<tr><td>TST-SEC-001</td><td>Security</td><td>OAuth token expires</td><td>Automatic refresh without data loss</td></tr>
+<tr><td>TST-SEC-002</td><td>Security</td><td>Invalid token</td><td>HTTP 401, audit log, no data exposure</td></tr>
+<tr><td>TST-SEC-003</td><td>Security</td><td>Encryption verification</td><td>TLS 1.2+ in transit, AES-256 at rest</td></tr>
+<tr><td>TST-REC-001</td><td>Reconciliation</td><td>INR 1.50 discrepancy</td><td>Break detected and alert generated</td></tr>
+<tr><td>TST-REC-002</td><td>Reconciliation</td><td>Missing cost centre</td><td>Referential check catches orphan</td></tr></tbody></table>
+  </section>
+</body>
+</html>
