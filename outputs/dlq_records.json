@@ -1,0 +1,54 @@
+[
+  {
+    "batchId": "BATCH-GL-20260629-0930",
+    "domain": "GENERAL_LEDGER",
+    "sourceKey": "1000:5100001004:2026:001",
+    "errors": [
+      {
+        "errorCode": "ERR-MAP-003",
+        "field": "cost_centre",
+        "message": "Unknown cost centre"
+      }
+    ],
+    "sourcePayload": {
+      "company_code": "1000",
+      "fiscal_year": "2026",
+      "fiscal_period": "003",
+      "document_number": "5100001004",
+      "line_item": "1",
+      "gl_account": "700000",
+      "cost_centre": "CC999",
+      "profit_centre": "PC100",
+      "posting_date": "20260628",
+      "currency": "INR",
+      "amount": "100.00",
+      "debit_credit": "S"
+    }
+  },
+  {
+    "batchId": "BATCH-GL-20260629-0930",
+    "domain": "GENERAL_LEDGER",
+    "sourceKey": "1000:5100001005:2026:001",
+    "errors": [
+      {
+        "errorCode": "ERR-MAP-003",
+        "field": "profit_centre",
+        "message": "Unknown profit centre"
+      }
+    ],
+    "sourcePayload": {
+      "company_code": "1000",
+      "fiscal_year": "2026",
+      "fiscal_period": "003",
+      "document_number": "5100001005",
+      "line_item": "1",
+      "gl_account": "700000",
+      "cost_centre": "CC100",
+      "profit_centre": "PC999",
+      "posting_date": "20260628",
+      "currency": "INR",
+      "amount": "100.00",
+      "debit_credit": "H"
+    }
+  }
+]

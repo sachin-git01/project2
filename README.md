@@ -37,6 +37,9 @@ flowchart LR
 | `monitoring/` | Grafana-style dashboard and alert specification |
 | `tests/` | Mandatory functional, non-functional, failure, security, and reconciliation test plan |
 | `postman/` | Example Postman collection skeleton |
+| `src/` | Runnable integration prototype for extraction, transformation, loading, DLQ, and reconciliation |
+| `data/sample/` | Sample SAP GL records used by the prototype |
+| `outputs/` | Generated prototype outputs after running the pipeline |
 
 ## Deliverable Index
 
@@ -53,6 +56,38 @@ flowchart LR
 | D6 Monitoring | `monitoring/D6_Monitoring_Dashboard_v1.md` |
 | D7 Test plan | `tests/D7_Integration_Test_Plan_v1.md` |
 | Stakeholder communication | `docs/D8_Stakeholder_Communication_v1.md` |
+| D9 Runnable prototype | `docs/D9_Runnable_Prototype_v1.md`, `src/sap_finsight_integration/` |
+
+## Runnable Prototype
+
+This submission includes a working Python prototype that simulates the SAP-to-FinSight GL pipeline. It reads sample SAP records, validates master data references, transforms valid records into FinSight canonical JSON, routes invalid records to DLQ, and produces a reconciliation report.
+
+Run from the repository root:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m sap_finsight_integration.cli
+```
+
+Run tests:
+
+```powershell
+python -m pytest
+```
+
+No-dependency test option:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m unittest discover -s tests -p "*unittest.py"
+```
+
+Expected generated files:
+
+- `outputs/finsight_gl_batch.json`
+- `outputs/dlq_records.json`
+- `outputs/reconciliation_report.json`
+- `outputs/load_result.json`
 
 ## Target Architecture Principles
 
@@ -90,6 +125,7 @@ flowchart LR
 - Tests include the 25 mandatory scenarios from the assessment.
 - Error registry includes extraction, mapping, load, reconciliation, and infrastructure errors.
 - Monitoring covers pipeline health, throughput, latency, errors, DLQ, reconciliation, SAP, FinSight, freshness, resources, Kafka lag, and circuit breakers.
+- Runnable prototype demonstrates transformation, idempotency key generation, DLQ routing, and reconciliation.
 
 ## Personalization Needed Before Final Submission
 
@@ -105,4 +141,3 @@ flowchart LR
 - OpenAPI 3.0 conventions for REST specification.
 - Enterprise Integration Patterns: message broker, dead letter channel, idempotent receiver, circuit breaker, wire tap.
 - Google SRE concepts: SLIs, SLOs, alerting, and error budgets.
-

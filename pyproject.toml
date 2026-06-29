@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sap-finsight-integration"
+version = "1.0.0"
+description = "Runnable SAP S/4HANA to FinSight integration prototype for Zetheta FDE-9B."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "pyyaml>=6.0.0"]
+
+[project.scripts]
+sap-finsight-pipeline = "sap_finsight_integration.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+

@@ -7,9 +7,10 @@ Thumbs.db
 # Generated exports
 *.tmp
 *.log
+__pycache__/
+*.pyc
 
 # Secrets
 .env
 *.pem
 *.key
-

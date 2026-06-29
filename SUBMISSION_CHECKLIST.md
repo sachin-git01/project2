@@ -24,6 +24,9 @@
 - [x] Monitoring dashboard specification created.
 - [x] 25 mandatory test scenarios included.
 - [x] Stakeholder communication document created.
+- [x] Runnable Python prototype added.
+- [x] Sample SAP data added.
+- [x] Automated pytest tests added.
 
 ## Before Upload
 
@@ -32,4 +35,4 @@
 - [ ] Replace placeholder hosts such as `example.in` if the evaluator expects environment-specific URLs.
 - [ ] Commit files with meaningful messages.
 - [ ] Push to the private GitHub repository before the deadline.
-
+- [ ] Mention the runnable prototype in the resubmission note.

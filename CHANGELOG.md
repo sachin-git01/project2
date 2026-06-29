@@ -23,3 +23,9 @@
 - Added 80+ field mappings across GL, AP, AR, cost centre, profit centre, material ledger, PO, SO, fixed assets, bank statements, budget/actual, and inventory.
 - Added error handling, reconciliation, monitoring, and test specifications.
 
+## Resubmission Upgrade - Runnable Evidence
+
+- Added Python integration prototype covering SAP CSV extraction, FinSight canonical transformation, validation, DLQ routing, and reconciliation.
+- Added sample SAP GL data with valid and invalid records.
+- Added pytest tests proving DLQ routing and balanced reconciliation.
+- Added D9 prototype documentation and README run instructions.

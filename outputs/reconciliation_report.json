@@ -1,0 +1,12 @@
+{
+  "batchId": "BATCH-GL-20260629-0930",
+  "domain": "GENERAL_LEDGER",
+  "sourceRecordCount": 8,
+  "acceptedRecordCount": 6,
+  "rejectedRecordCount": 2,
+  "debitTotalInr": 253125.0,
+  "creditTotalInr": 253125.0,
+  "netAmountInr": 0.0,
+  "checksum": "8676c1adfc4a3254d74b7435e4948929717a01668e919b648920480fca4665ef",
+  "status": "RECONCILED"
+}
