@@ -1,0 +1,314 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project 1B Custom API Integration Submission</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #16202a;
+      line-height: 1.5;
+      margin: 0;
+      background: #ffffff;
+    }
+    h1, h2, h3 { color: #0b3558; line-height: 1.2; }
+    h1 { font-size: 28px; margin: 0 0 12px; }
+    h2 { font-size: 20px; border-bottom: 1px solid #d8e1ea; padding-bottom: 6px; margin-top: 28px; }
+    h3 { font-size: 15px; margin-top: 18px; }
+    p { margin: 8px 0; }
+    .cover {
+      border: 2px solid #0b6f8f;
+      padding: 28px;
+      margin-bottom: 24px;
+      border-radius: 8px;
+    }
+    .subtitle { color: #536273; font-size: 15px; }
+    .meta {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 6px 14px;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+    .label { font-weight: bold; color: #34495e; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 12px;
+    }
+    th, td {
+      border: 1px solid #d8e1ea;
+      padding: 7px;
+      vertical-align: top;
+    }
+    th { background: #eef5f8; color: #0b3558; text-align: left; }
+    code, pre { font-family: Consolas, "Courier New", monospace; }
+    pre {
+      background: #f4f7fa;
+      border: 1px solid #d8e1ea;
+      padding: 10px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      font-size: 11px;
+    }
+    .badge {
+      display: inline-block;
+      background: #e6f4ea;
+      color: #116329;
+      border: 1px solid #b7dfc2;
+      padding: 4px 8px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .page-break { page-break-before: always; }
+    .diagram {
+      background: #fbfcfd;
+      border: 1px solid #d8e1ea;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>Project 1B: Custom API Integration</h1>
+    <p class="subtitle">SAP S/4HANA ERP to FinSight Financial Analytics Platform</p>
+    <p><span class="badge">Resubmission upgraded with runnable prototype and validation evidence</span></p>
+    <div class="meta">
+      <div class="label">Repository</div><div>https://github.com/sachin-git01/project2</div>
+      <div class="label">Project Category</div><div>Enterprise Technology / API Integration / Financial Analytics</div>
+      <div class="label">Primary Deliverable</div><div>End-to-end integration framework design and runnable simulation</div>
+      <div class="label">Source System</div><div>SAP S/4HANA</div>
+      <div class="label">Target System</div><div>FinSight financial analytics platform</div>
+    </div>
+  </section>
+
+  <h2>1. Executive Summary</h2>
+  <p>
+    This project designs and demonstrates a custom API integration framework that connects a client's SAP S/4HANA ERP system with a financial analytics platform. The solution covers API specifications, data extraction, transformation logic, validation, error handling, reconciliation, monitoring, and stakeholder communication.
+  </p>
+  <p>
+    The resubmission includes a working Python prototype that simulates a General Ledger integration flow. It reads SAP-style source records, validates master data references, transforms valid records into a canonical FinSight payload, routes invalid records into a dead letter queue, and generates a reconciliation report.
+  </p>
+
+  <h2>2. Problem Understanding</h2>
+  <p>
+    Manufacturing finance teams often rely on delayed exports from ERP systems, causing late visibility into journal postings, payables, receivables, cash, procurement, budget variance, and inventory valuation. The objective is to reduce manual data movement while preserving accounting accuracy, audit traceability, and SAP production stability.
+  </p>
+
+  <h2>3. Target Architecture</h2>
+  <table>
+    <tr><th>Layer</th><th>Design</th><th>Reason</th></tr>
+    <tr><td>SAP Extraction</td><td>ODP/CDS/OData/RFC/IDoc facade</td><td>Uses supported SAP integration patterns with delta tracking.</td></tr>
+    <tr><td>Messaging</td><td>Kafka topics per domain</td><td>Decouples SAP from FinSight and supports replay.</td></tr>
+    <tr><td>Transformation</td><td>Versioned rule engine</td><td>Maps SAP-specific fields into canonical financial schemas.</td></tr>
+    <tr><td>Validation</td><td>Mandatory field, date, currency, and master data checks</td><td>Prevents inaccurate financial analytics.</td></tr>
+    <tr><td>Loading</td><td>Idempotent FinSight batch upsert APIs</td><td>Prevents duplicate records during retry.</td></tr>
+    <tr><td>Reconciliation</td><td>Record count, totals, checksum, and lineage checks</td><td>Proves that every accepted record is accounted for.</td></tr>
+    <tr><td>Monitoring</td><td>Metrics, logs, traces, DLQ, freshness, and circuit breaker panels</td><td>Supports production operations and incident response.</td></tr>
+  </table>
+
+  <h3>Architecture Diagram</h3>
+  <div class="diagram">SAP S/4HANA -> SAP Connector -> Kafka Topics -> Transformation Engine -> Validation Service -> FinSight Loader -> FinSight Analytics
+                                      |                         |                         |
+                                      v                         v                         v
+                               Audit Store                   DLQ                 Reconciliation Service
+                                      \_________________________|_________________________/
+                                                        Monitoring Stack</div>
+
+  <h2>4. API Specification Coverage</h2>
+  <p>The submission includes OpenAPI 3.0 specifications for SAP source extraction and FinSight destination ingestion.</p>
+  <table>
+    <tr><th>API File</th><th>Coverage</th></tr>
+    <tr><td>api/API_SAP_Source.yaml</td><td>12 source endpoints covering GL, AP, AR, cost centre, profit centre, material ledger, purchase orders, sales orders, fixed assets, bank statements, budget/actual, and inventory.</td></tr>
+    <tr><td>api/API_FinSight_Destination.yaml</td><td>12 destination batch upsert endpoints plus ingestion status, OAuth 2.0 security, idempotency key header, rate limit headers, and shared error envelope.</td></tr>
+  </table>
+
+  <h2>5. Data Mapping and Transformation</h2>
+  <p>
+    The mapping specification contains 102 field-level mappings, exceeding the 50-field minimum. Mappings cover General Ledger, Accounts Payable, Accounts Receivable, Cost Centre, Profit Centre, Material Ledger, Purchase Orders, Sales Orders, Fixed Assets, Bank Statements, Budget vs Actual, and Inventory.
+  </p>
+  <table>
+    <tr><th>Rule Area</th><th>Implementation</th></tr>
+    <tr><td>Dates</td><td>SAP YYYYMMDD values are converted to ISO date format.</td></tr>
+    <tr><td>Currency</td><td>ISO currency validation and point-in-time conversion to INR.</td></tr>
+    <tr><td>Fiscal Periods</td><td>Periods 001-012 map normally; 013-016 are marked as special periods.</td></tr>
+    <tr><td>Idempotency</td><td>Target keys are generated from tenant, domain, company code, fiscal year, document number, and line item.</td></tr>
+    <tr><td>Lineage</td><td>Every target record keeps source system, source table, source document, and batch ID.</td></tr>
+  </table>
+
+  <h2>6. Error Handling and Resilience</h2>
+  <table>
+    <tr><th>Error Type</th><th>Handling</th></tr>
+    <tr><td>Transient SAP/API failures</td><td>Retry with exponential backoff and circuit breaker protection.</td></tr>
+    <tr><td>FinSight HTTP 429</td><td>Honor Retry-After header and throttle consumers.</td></tr>
+    <tr><td>Mapping failures</td><td>Route invalid records to DLQ with error code and source payload.</td></tr>
+    <tr><td>Duplicate writes</td><td>Use deterministic idempotency keys and payload hash comparison.</td></tr>
+    <tr><td>Reconciliation breaks</td><td>Generate break report and route to operations or finance data steward.</td></tr>
+  </table>
+
+  <h2>7. Runnable Prototype Evidence</h2>
+  <p>The resubmission includes executable code under <code>src/sap_finsight_integration/</code>.</p>
+  <table>
+    <tr><th>Prototype Component</th><th>File</th><th>Purpose</th></tr>
+    <tr><td>Extractor</td><td>extract.py</td><td>Reads SAP-style CSV records.</td></tr>
+    <tr><td>Transformer</td><td>transform.py</td><td>Validates and maps SAP rows to FinSight canonical records.</td></tr>
+    <tr><td>Loader</td><td>load.py</td><td>Writes simulated FinSight batch payload.</td></tr>
+    <tr><td>Reconciliation</td><td>reconcile.py</td><td>Calculates counts, debit/credit totals, net amount, checksum, and status.</td></tr>
+    <tr><td>CLI</td><td>cli.py</td><td>Runs the pipeline end to end.</td></tr>
+  </table>
+
+  <h3>Run Commands</h3>
+  <pre>$env:PYTHONPATH='src'
+python -m sap_finsight_integration.cli
+python -m unittest discover -s tests -p '*unittest.py'</pre>
+
+  <h3>Observed Validation Output</h3>
+  <pre>Batch: BATCH-GL-20260629-0930
+Status: RECONCILED
+Accepted: 6
+Rejected/DLQ: 2
+Ran 2 tests in 0.016s
+OK</pre>
+
+  <h3>Reconciliation Report</h3>
+  <pre>{
+  &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+  &quot;domain&quot;: &quot;GENERAL_LEDGER&quot;,
+  &quot;sourceRecordCount&quot;: 8,
+  &quot;acceptedRecordCount&quot;: 6,
+  &quot;rejectedRecordCount&quot;: 2,
+  &quot;debitTotalInr&quot;: 253125.0,
+  &quot;creditTotalInr&quot;: 253125.0,
+  &quot;netAmountInr&quot;: 0.0,
+  &quot;checksum&quot;: &quot;8676c1adfc4a3254d74b7435e4948929717a01668e919b648920480fca4665ef&quot;,
+  &quot;status&quot;: &quot;RECONCILED&quot;
+}</pre>
+
+  <h3>Load Result</h3>
+  <pre>{
+  &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+  &quot;status&quot;: &quot;COMPLETED&quot;,
+  &quot;acceptedCount&quot;: 6,
+  &quot;rejectedCount&quot;: 0
+}</pre>
+
+  <h2>8. Sample Input and DLQ Evidence</h2>
+  <h3>Sample SAP GL Input</h3>
+  <pre>company_code,fiscal_year,fiscal_period,document_number,line_item,gl_account,cost_centre,profit_centre,posting_date,currency,amount,debit_credit
+1000,2026,003,5100001001,1,400000,CC100,PC100,20260628,INR,125000.00,S
+1000,2026,003,5100001001,2,110000,CC100,PC100,20260628,INR,125000.00,H
+1000,2026,003,5100001002,1,500000,CC200,PC200,20260628,USD,1000.00,S
+1000,2026,003,5100001002,2,210000,CC200,PC200,20260628,USD,1000.00,H
+1000,2026,013,5100001003,1,600000,CC300,PC300,20260628,EUR,500.00,S
+1000,2026,013,5100001003,2,310000,CC300,PC300,20260628,EUR,500.00,H
+1000,2026,003,5100001004,1,700000,CC999,PC100,20260628,INR,100.00,S
+1000,2026,003,5100001005,1,700000,CC100,PC999,20260628,INR,100.00,H
+
+</pre>
+
+  <h3>DLQ Output</h3>
+  <pre>[
+  {
+    &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+    &quot;domain&quot;: &quot;GENERAL_LEDGER&quot;,
+    &quot;sourceKey&quot;: &quot;1000:5100001004:2026:001&quot;,
+    &quot;errors&quot;: [
+      {
+        &quot;errorCode&quot;: &quot;ERR-MAP-003&quot;,
+        &quot;field&quot;: &quot;cost_centre&quot;,
+        &quot;message&quot;: &quot;Unknown cost centre&quot;
+      }
+    ],
+    &quot;sourcePayload&quot;: {
+      &quot;company_code&quot;: &quot;1000&quot;,
+      &quot;fiscal_year&quot;: &quot;2026&quot;,
+      &quot;fiscal_period&quot;: &quot;003&quot;,
+      &quot;document_number&quot;: &quot;5100001004&quot;,
+      &quot;line_item&quot;: &quot;1&quot;,
+      &quot;gl_account&quot;: &quot;700000&quot;,
+      &quot;cost_centre&quot;: &quot;CC999&quot;,
+      &quot;profit_centre&quot;: &quot;PC100&quot;,
+      &quot;posting_date&quot;: &quot;20260628&quot;,
+      &quot;currency&quot;: &quot;INR&quot;,
+      &quot;amount&quot;: &quot;100.00&quot;,
+      &quot;debit_credit&quot;: &quot;S&quot;
+    }
+  },
+  {
+    &quot;batchId&quot;: &quot;BATCH-GL-20260629-0930&quot;,
+    &quot;domain&quot;: &quot;GENERAL_LEDGER&quot;,
+    &quot;sourceKey&quot;: &quot;1000:5100001005:2026:001&quot;,
+    &quot;errors&quot;: [
+      {
+        &quot;errorCode&quot;: &quot;ERR-MAP-003&quot;,
+        &quot;field&quot;: &quot;profit_centre&quot;,
+        &quot;message&quot;: &quot;Unknown profit centre&quot;
+      }
+    ],
+    &quot;sourcePayload&quot;: {
+      &quot;company_code&quot;: &quot;1000&quot;,
+      &quot;fiscal_year&quot;: &quot;2026&quot;,
+      &quot;fiscal_period&quot;: &quot;003&quot;,
+      &quot;document_number&quot;: &quot;5100001005&quot;,
+      &quot;line_item&quot;: &quot;1&quot;,
+      &quot;gl_account&quot;: &quot;700000&quot;,
+      &quot;cost_centre&quot;: &quot;CC100&quot;,
+      &quot;profit_centre&quot;: &quot;PC999&quot;,
+      &quot;posting_date&quot;: &quot;20260628&quot;,
+      &quot;currency&quot;: &quot;INR&quot;,
+      &quot;amount&quot;: &quot;100.00&quot;,
+      &quot;debit_credit&quot;: &quot;H&quot;
+    }
+  }
+]</pre>
+
+  <h2>9. Testing Coverage</h2>
+  <p>The full test plan includes 25 mandatory scenarios across functional, non-functional, failure, security, and reconciliation categories. The runnable prototype also includes automated unit tests for:</p>
+  <ul>
+    <li>Invalid master data routing to DLQ.</li>
+    <li>Successful output generation.</li>
+    <li>Balanced debit-credit reconciliation.</li>
+    <li>Correct source, accepted, and rejected record counts.</li>
+  </ul>
+
+  <h2>10. Monitoring and Operations</h2>
+  <table>
+    <tr><th>Panel</th><th>Purpose</th></tr>
+    <tr><td>Pipeline Health</td><td>Shows green/yellow/red status per domain.</td></tr>
+    <tr><td>Throughput</td><td>Tracks records processed per second.</td></tr>
+    <tr><td>Error Rate</td><td>Alerts when errors exceed threshold.</td></tr>
+    <tr><td>DLQ Depth</td><td>Alerts when failed records require attention.</td></tr>
+    <tr><td>Reconciliation Status</td><td>Highlights financial breaks by domain.</td></tr>
+    <tr><td>SAP and FinSight Health</td><td>Tracks response time, pool utilization, rate limits, and tokens.</td></tr>
+  </table>
+
+  <h2>11. Deliverables Included</h2>
+  <table>
+    <tr><th>Deliverable</th><th>Artifact</th></tr>
+    <tr><td>Project overview</td><td>README.md</td></tr>
+    <tr><td>Requirements</td><td>docs/D0_Requirements_v1.md</td></tr>
+    <tr><td>Architecture</td><td>docs/D1_Integration_Architecture_v1.md and diagrams/*.mmd</td></tr>
+    <tr><td>API specification</td><td>docs/D2_API_Specification_v1.md and api/*.yaml</td></tr>
+    <tr><td>Mappings</td><td>mappings/MAP_Finance_AllDomains_v1.md</td></tr>
+    <tr><td>Error handling</td><td>docs/D4_Error_Handling_Framework_v1.md</td></tr>
+    <tr><td>Reconciliation</td><td>docs/D5_Reconciliation_Specification_v1.md</td></tr>
+    <tr><td>Monitoring</td><td>monitoring/D6_Monitoring_Dashboard_v1.md</td></tr>
+    <tr><td>Test plan</td><td>tests/D7_Integration_Test_Plan_v1.md</td></tr>
+    <tr><td>Runnable prototype</td><td>src/, data/sample/, outputs/, tests/test_pipeline_unittest.py</td></tr>
+    <tr><td>Single file bundle</td><td>submission_single_file.html</td></tr>
+  </table>
+
+  <h2>12. Conclusion</h2>
+  <p>
+    This resubmission addresses the project statement by combining a full enterprise integration design with runnable proof of the core pipeline behavior. The solution demonstrates API contract design, extraction planning, transformation rules, validation, DLQ handling, idempotency, reconciliation, monitoring, and stakeholder-ready documentation.
+  </p>
+</body>
+</html>
